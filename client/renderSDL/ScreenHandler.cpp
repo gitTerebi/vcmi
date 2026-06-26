@@ -853,6 +853,8 @@ void ScreenHandler::updateWindowState()
 			Point resolution = getPreferredWindowResolution();
 			SDL_SetWindowFullscreen(mainWindow, 0);
 			SDL_SetWindowSize(mainWindow, resolution.x, resolution.y);
+			if(settings["video"]["windowMaximized"].Bool())
+				SDL_MaximizeWindow(mainWindow);
 			return;
 		}
 	}
@@ -1012,7 +1014,12 @@ SDL_Window * ScreenHandler::createWindow()
 			return createWindowImpl(Point(), SDL_WINDOW_FULLSCREEN_DESKTOP, false);
 
 		case EWindowMode::WINDOWED:
-			return createWindowImpl(dimensions, SDL_WINDOW_RESIZABLE, true);
+		{
+			int flags = SDL_WINDOW_RESIZABLE;
+			if(settings["video"]["windowMaximized"].Bool())
+				flags |= SDL_WINDOW_MAXIMIZED;
+			return createWindowImpl(dimensions, flags, true);
+		}
 
 		default:
 			return nullptr;
