@@ -72,6 +72,14 @@ static constexpr std::array upscalingFilterTypes =
 	"xbrz4"
 };
 
+static constexpr std::array gpuUpscalingFilterTypes =
+{
+	"xbrz2",
+	"xbrz4",
+	"xsal2",
+	"xsal4"
+};
+
 static constexpr std::array downscalingFilterTypes =
 {
 	"nearest",
@@ -246,6 +254,10 @@ void CSettingsView::loadSettings()
 	std::string upscalingFilter = settings["video"]["upscalingFilter"].String();
 	int upscalingFilterIndex = vstd::find_pos(upscalingFilterTypes, upscalingFilter);
 	ui->comboBoxUpscalingFilter->setCurrentIndex(upscalingFilterIndex);
+
+	std::string gpuUpscalingFilter = settings["video"]["gpuUpscalingFilter"].String();
+	int gpuUpscalingFilterIndex = vstd::find_pos(gpuUpscalingFilterTypes, gpuUpscalingFilter);
+	ui->comboBoxGpuUpscalingFilter->setCurrentIndex(gpuUpscalingFilterIndex);
 
 	std::string downscalingFilter = settings["video"]["downscalingFilter"].String();
 	int downscalingFilterIndex = vstd::find_pos(downscalingFilterTypes, downscalingFilter);
@@ -813,6 +825,12 @@ void CSettingsView::on_comboBoxUpscalingFilter_currentIndexChanged(int index)
 {
 	Settings node = settings.write["video"]["upscalingFilter"];
 	node->String() = upscalingFilterTypes[index];
+}
+
+void CSettingsView::on_comboBoxGpuUpscalingFilter_currentIndexChanged(int index)
+{
+	Settings node = settings.write["video"]["gpuUpscalingFilter"];
+	node->String() = gpuUpscalingFilterTypes[index];
 }
 
 void CSettingsView::on_comboBoxDownscalingFilter_currentIndexChanged(int index)

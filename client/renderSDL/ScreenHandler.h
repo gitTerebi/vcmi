@@ -18,6 +18,8 @@ struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_Surface;
 
+class OpenGLGpuUpscaler;
+
 enum class EWindowMode
 {
 	// game runs in a window that covers part of the screen
@@ -47,6 +49,7 @@ class ScreenHandler final : public IScreenHandler
 	SDL_Window * mainWindow = nullptr;
 	SDL_Texture * screenTexture = nullptr;
 	SDL_Surface * screen = nullptr;
+	std::unique_ptr<OpenGLGpuUpscaler> gpuUpscaler;
 
 	EUpscalingFilter upscalingFilter = EUpscalingFilter::AUTO;
 	ColorScheme colorScheme = ColorScheme::NONE;

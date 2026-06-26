@@ -40,11 +40,554 @@
 #endif
 
 #include <SDL.h>
+#include <SDL_opengl.h>
 
 // TODO: should be made into a private members of ScreenHandler
 SDL_Renderer * mainRenderer = nullptr;
 
 static constexpr Point heroes3Resolution = Point(800, 600);
+
+class OpenGLGpuUpscaler
+{
+	using GLchar = char;
+	using GLsizeiptr = ptrdiff_t;
+	using GlCreateShader = GLuint (APIENTRYP)(GLenum type);
+	using GlShaderSource = void (APIENTRYP)(GLuint shader, GLsizei count, const GLchar ** string, const GLint * length);
+	using GlCompileShader = void (APIENTRYP)(GLuint shader);
+	using GlGetShaderiv = void (APIENTRYP)(GLuint shader, GLenum pname, GLint * params);
+	using GlGetShaderInfoLog = void (APIENTRYP)(GLuint shader, GLsizei bufSize, GLsizei * length, GLchar * infoLog);
+	using GlDeleteShader = void (APIENTRYP)(GLuint shader);
+	using GlCreateProgram = GLuint (APIENTRYP)();
+	using GlAttachShader = void (APIENTRYP)(GLuint program, GLuint shader);
+	using GlLinkProgram = void (APIENTRYP)(GLuint program);
+	using GlGetProgramiv = void (APIENTRYP)(GLuint program, GLenum pname, GLint * params);
+	using GlGetProgramInfoLog = void (APIENTRYP)(GLuint program, GLsizei bufSize, GLsizei * length, GLchar * infoLog);
+	using GlDeleteProgram = void (APIENTRYP)(GLuint program);
+	using GlUseProgram = void (APIENTRYP)(GLuint program);
+	using GlGetUniformLocation = GLint (APIENTRYP)(GLuint program, const GLchar * name);
+	using GlUniform1i = void (APIENTRYP)(GLint location, GLint v0);
+	using GlUniform2f = void (APIENTRYP)(GLint location, GLfloat v0, GLfloat v1);
+	using GlEnable = void (APIENTRYP)(GLenum cap);
+	using GlDisable = void (APIENTRYP)(GLenum cap);
+	using GlIsEnabled = GLboolean (APIENTRYP)(GLenum cap);
+	using GlGetIntegerv = void (APIENTRYP)(GLenum pname, GLint * data);
+	using GlViewport = void (APIENTRYP)(GLint x, GLint y, GLsizei width, GLsizei height);
+	using GlMatrixMode = void (APIENTRYP)(GLenum mode);
+	using GlPushMatrix = void (APIENTRYP)();
+	using GlPopMatrix = void (APIENTRYP)();
+	using GlLoadIdentity = void (APIENTRYP)();
+	using GlOrtho = void (APIENTRYP)(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble nearVal, GLdouble farVal);
+	using GlBegin = void (APIENTRYP)(GLenum mode);
+	using GlEnd = void (APIENTRYP)();
+	using GlTexCoord2f = void (APIENTRYP)(GLfloat s, GLfloat t);
+	using GlVertex2f = void (APIENTRYP)(GLfloat x, GLfloat y);
+	using GlActiveTexture = void (APIENTRYP)(GLenum texture);
+	using GlGenTextures = void (APIENTRYP)(GLsizei n, GLuint * textures);
+	using GlDeleteTextures = void (APIENTRYP)(GLsizei n, const GLuint * textures);
+	using GlBindTexture = void (APIENTRYP)(GLenum target, GLuint texture);
+	using GlTexImage2D = void (APIENTRYP)(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void * pixels);
+	using GlTexParameteri = void (APIENTRYP)(GLenum target, GLenum pname, GLint param);
+	using GlGenFramebuffers = void (APIENTRYP)(GLsizei n, GLuint * ids);
+	using GlDeleteFramebuffers = void (APIENTRYP)(GLsizei n, const GLuint * framebuffers);
+	using GlBindFramebuffer = void (APIENTRYP)(GLenum target, GLuint framebuffer);
+	using GlFramebufferTexture2D = void (APIENTRYP)(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+	using GlCheckFramebufferStatus = GLenum (APIENTRYP)(GLenum target);
+
+	GlCreateShader glCreateShader = nullptr;
+	GlShaderSource glShaderSource = nullptr;
+	GlCompileShader glCompileShader = nullptr;
+	GlGetShaderiv glGetShaderiv = nullptr;
+	GlGetShaderInfoLog glGetShaderInfoLog = nullptr;
+	GlDeleteShader glDeleteShader = nullptr;
+	GlCreateProgram glCreateProgram = nullptr;
+	GlAttachShader glAttachShader = nullptr;
+	GlLinkProgram glLinkProgram = nullptr;
+	GlGetProgramiv glGetProgramiv = nullptr;
+	GlGetProgramInfoLog glGetProgramInfoLog = nullptr;
+	GlDeleteProgram glDeleteProgram = nullptr;
+	GlUseProgram glUseProgram = nullptr;
+	GlGetUniformLocation glGetUniformLocation = nullptr;
+	GlUniform1i glUniform1i = nullptr;
+	GlUniform2f glUniform2f = nullptr;
+	GlEnable glEnable = nullptr;
+	GlDisable glDisable = nullptr;
+	GlIsEnabled glIsEnabled = nullptr;
+	GlGetIntegerv glGetIntegerv = nullptr;
+	GlViewport glViewport = nullptr;
+	GlMatrixMode glMatrixMode = nullptr;
+	GlPushMatrix glPushMatrix = nullptr;
+	GlPopMatrix glPopMatrix = nullptr;
+	GlLoadIdentity glLoadIdentity = nullptr;
+	GlOrtho glOrtho = nullptr;
+	GlBegin glBegin = nullptr;
+	GlEnd glEnd = nullptr;
+	GlTexCoord2f glTexCoord2f = nullptr;
+	GlVertex2f glVertex2f = nullptr;
+	GlActiveTexture glActiveTexture = nullptr;
+	GlGenTextures glGenTextures = nullptr;
+	GlDeleteTextures glDeleteTextures = nullptr;
+	GlBindTexture glBindTexture = nullptr;
+	GlTexImage2D glTexImage2D = nullptr;
+	GlTexParameteri glTexParameteri = nullptr;
+	GlGenFramebuffers glGenFramebuffers = nullptr;
+	GlDeleteFramebuffers glDeleteFramebuffers = nullptr;
+	GlBindFramebuffer glBindFramebuffer = nullptr;
+	GlFramebufferTexture2D glFramebufferTexture2D = nullptr;
+	GlCheckFramebufferStatus glCheckFramebufferStatus = nullptr;
+
+	GLuint program = 0;
+	GLint textureUniform = -1;
+	GLint texelUniform = -1;
+	GLint sourceSizeUniform = -1;
+	GLuint midFramebuffer = 0;
+	GLuint midTexture = 0;
+	Point midTextureSize;
+
+	template<typename Function>
+	static Function loadFunction(const char * name)
+	{
+		return reinterpret_cast<Function>(SDL_GL_GetProcAddress(name));
+	}
+
+	bool loadFunctions()
+	{
+		glCreateShader = loadFunction<GlCreateShader>("glCreateShader");
+		glShaderSource = loadFunction<GlShaderSource>("glShaderSource");
+		glCompileShader = loadFunction<GlCompileShader>("glCompileShader");
+		glGetShaderiv = loadFunction<GlGetShaderiv>("glGetShaderiv");
+		glGetShaderInfoLog = loadFunction<GlGetShaderInfoLog>("glGetShaderInfoLog");
+		glDeleteShader = loadFunction<GlDeleteShader>("glDeleteShader");
+		glCreateProgram = loadFunction<GlCreateProgram>("glCreateProgram");
+		glAttachShader = loadFunction<GlAttachShader>("glAttachShader");
+		glLinkProgram = loadFunction<GlLinkProgram>("glLinkProgram");
+		glGetProgramiv = loadFunction<GlGetProgramiv>("glGetProgramiv");
+		glGetProgramInfoLog = loadFunction<GlGetProgramInfoLog>("glGetProgramInfoLog");
+		glDeleteProgram = loadFunction<GlDeleteProgram>("glDeleteProgram");
+		glUseProgram = loadFunction<GlUseProgram>("glUseProgram");
+		glGetUniformLocation = loadFunction<GlGetUniformLocation>("glGetUniformLocation");
+		glUniform1i = loadFunction<GlUniform1i>("glUniform1i");
+		glUniform2f = loadFunction<GlUniform2f>("glUniform2f");
+		glEnable = loadFunction<GlEnable>("glEnable");
+		glDisable = loadFunction<GlDisable>("glDisable");
+		glIsEnabled = loadFunction<GlIsEnabled>("glIsEnabled");
+		glGetIntegerv = loadFunction<GlGetIntegerv>("glGetIntegerv");
+		glViewport = loadFunction<GlViewport>("glViewport");
+		glMatrixMode = loadFunction<GlMatrixMode>("glMatrixMode");
+		glPushMatrix = loadFunction<GlPushMatrix>("glPushMatrix");
+		glPopMatrix = loadFunction<GlPopMatrix>("glPopMatrix");
+		glLoadIdentity = loadFunction<GlLoadIdentity>("glLoadIdentity");
+		glOrtho = loadFunction<GlOrtho>("glOrtho");
+		glBegin = loadFunction<GlBegin>("glBegin");
+		glEnd = loadFunction<GlEnd>("glEnd");
+		glTexCoord2f = loadFunction<GlTexCoord2f>("glTexCoord2f");
+		glVertex2f = loadFunction<GlVertex2f>("glVertex2f");
+		glActiveTexture = loadFunction<GlActiveTexture>("glActiveTexture");
+		glGenTextures = loadFunction<GlGenTextures>("glGenTextures");
+		glDeleteTextures = loadFunction<GlDeleteTextures>("glDeleteTextures");
+		glBindTexture = loadFunction<GlBindTexture>("glBindTexture");
+		glTexImage2D = loadFunction<GlTexImage2D>("glTexImage2D");
+		glTexParameteri = loadFunction<GlTexParameteri>("glTexParameteri");
+		glGenFramebuffers = loadFunction<GlGenFramebuffers>("glGenFramebuffers");
+		glDeleteFramebuffers = loadFunction<GlDeleteFramebuffers>("glDeleteFramebuffers");
+		glBindFramebuffer = loadFunction<GlBindFramebuffer>("glBindFramebuffer");
+		glFramebufferTexture2D = loadFunction<GlFramebufferTexture2D>("glFramebufferTexture2D");
+		glCheckFramebufferStatus = loadFunction<GlCheckFramebufferStatus>("glCheckFramebufferStatus");
+
+		return glCreateShader && glShaderSource && glCompileShader && glGetShaderiv && glGetShaderInfoLog && glDeleteShader
+			&& glCreateProgram && glAttachShader && glLinkProgram && glGetProgramiv && glGetProgramInfoLog && glDeleteProgram
+			&& glUseProgram && glGetUniformLocation && glUniform1i && glUniform2f
+			&& glEnable && glDisable && glIsEnabled && glGetIntegerv && glViewport && glMatrixMode && glPushMatrix
+			&& glPopMatrix && glLoadIdentity && glOrtho && glBegin && glEnd && glTexCoord2f && glVertex2f
+			&& glActiveTexture && glGenTextures && glDeleteTextures && glBindTexture && glTexImage2D && glTexParameteri
+			&& glGenFramebuffers && glDeleteFramebuffers && glBindFramebuffer && glFramebufferTexture2D && glCheckFramebufferStatus;
+	}
+
+	std::string shaderLog(GLuint shader) const
+	{
+		std::array<GLchar, 1024> buffer{};
+		GLsizei length = 0;
+		glGetShaderInfoLog(shader, buffer.size(), &length, buffer.data());
+		return std::string(buffer.data(), length);
+	}
+
+	std::string programLog(GLuint programToCheck) const
+	{
+		std::array<GLchar, 1024> buffer{};
+		GLsizei length = 0;
+		glGetProgramInfoLog(programToCheck, buffer.size(), &length, buffer.data());
+		return std::string(buffer.data(), length);
+	}
+
+	GLuint compileShader(GLenum type, const char * source)
+	{
+		GLuint shader = glCreateShader(type);
+		glShaderSource(shader, 1, &source, nullptr);
+		glCompileShader(shader);
+
+		GLint status = GL_FALSE;
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+		if(status != GL_TRUE)
+		{
+			logGlobal->warn("Failed to compile GPU upscaling shader: %s", shaderLog(shader));
+			glDeleteShader(shader);
+			return 0;
+		}
+
+		return shader;
+	}
+
+	bool ensureMidTexture(const Point & size)
+	{
+		if(midTexture && midTextureSize == size)
+			return true;
+
+		if(midTexture)
+			glDeleteTextures(1, &midTexture);
+		if(midFramebuffer)
+			glDeleteFramebuffers(1, &midFramebuffer);
+		midTexture = 0;
+		midFramebuffer = 0;
+		midTextureSize = size;
+
+		glGenTextures(1, &midTexture);
+		glBindTexture(GL_TEXTURE_2D, midTexture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+		glGenFramebuffers(1, &midFramebuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, midFramebuffer);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, midTexture, 0);
+		bool complete = glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		if(!complete)
+		{
+			logGlobal->warn("OpenGL GPU upscaling disabled: intermediate framebuffer is incomplete");
+			return false;
+		}
+
+		return true;
+	}
+
+public:
+	OpenGLGpuUpscaler(const std::string & filter)
+	{
+		if(!loadFunctions())
+		{
+			logGlobal->warn("OpenGL GPU upscaling disabled: required shader functions are unavailable");
+			return;
+		}
+
+		static constexpr const char * vertexShaderSource = R"(
+			#version 120
+			void main()
+			{
+				gl_Position = ftransform();
+				gl_TexCoord[0] = gl_MultiTexCoord0;
+			}
+		)";
+
+		static constexpr const char * xbrzFragmentShaderSource = R"(
+			#version 120
+			#define BLEND_NONE 0
+			#define BLEND_NORMAL 1
+			#define BLEND_DOMINANT 2
+			#define LUMW 1.0
+			#define EQTOL (30.0 / 255.0)
+			#define STEEPT 2.2
+			#define DOMT 3.6
+			#define MPI 3.1415926535
+
+			uniform sampler2D screenTexture;
+			uniform vec2 texelSize;
+			uniform vec2 sourceSize;
+
+			float reduce(vec3 c)
+			{
+				return dot(c, vec3(65536.0, 256.0, 1.0));
+			}
+
+			float colorDistance(vec3 a, vec3 b)
+			{
+				const vec3 w = vec3(0.2627, 0.6780, 0.0593);
+				float scaleB = 0.5 / (1.0 - w.b);
+				float scaleR = 0.5 / (1.0 - w.r);
+				vec3 diff = a - b;
+				float y = dot(diff, w);
+				float cb = scaleB * (diff.b - y);
+				float cr = scaleR * (diff.r - y);
+				return sqrt((LUMW * y) * (LUMW * y) + cb * cb + cr * cr);
+			}
+
+			bool colorEqual(vec3 a, vec3 b)
+			{
+				return colorDistance(a, b) < EQTOL;
+			}
+
+			vec3 mixIf(vec3 dst, vec3 src, float weight, bool enabled)
+			{
+				return enabled ? mix(dst, src, weight) : dst;
+			}
+
+			void scalePixel(ivec4 blend, vec3 k[9], inout vec3 dst[4])
+			{
+				float v0 = reduce(k[0]);
+				float v4 = reduce(k[4]);
+				float v5 = reduce(k[5]);
+				float v7 = reduce(k[7]);
+				float v8 = reduce(k[8]);
+				float d14 = colorDistance(k[1], k[4]);
+				float d38 = colorDistance(k[3], k[8]);
+				bool shallow = (STEEPT * d14 <= d38) && (v0 != v4) && (v5 != v4);
+				bool steep = (STEEPT * d38 <= d14) && (v0 != v8) && (v7 != v8);
+				bool need = blend[2] != BLEND_NONE;
+				bool doLine = blend[2] >= BLEND_DOMINANT || !(
+					(blend[1] != BLEND_NONE && !colorEqual(k[0], k[4])) ||
+					(blend[3] != BLEND_NONE && !colorEqual(k[0], k[8])) ||
+					(colorEqual(k[4], k[3]) && colorEqual(k[3], k[2]) && colorEqual(k[2], k[1]) && colorEqual(k[1], k[8]) && !colorEqual(k[0], k[2])));
+				vec3 blendPixel = colorDistance(k[0], k[1]) <= colorDistance(k[0], k[3]) ? k[1] : k[3];
+				dst[1] = mixIf(dst[1], blendPixel, 0.25, need && doLine && steep);
+				dst[2] = mixIf(dst[2], blendPixel, doLine ? (shallow ? (steep ? 5.0 / 6.0 : 0.75) : (steep ? 0.75 : 0.5)) : 1.0 - (MPI / 4.0), need);
+				dst[3] = mixIf(dst[3], blendPixel, 0.25, need && doLine && shallow);
+			}
+
+			void rotateDst(inout vec3 dst[4])
+			{
+				vec3 tmp = dst[3];
+				dst[3] = dst[2];
+				dst[2] = dst[1];
+				dst[1] = dst[0];
+				dst[0] = tmp;
+			}
+
+			void main()
+			{
+				vec2 base = (floor(gl_TexCoord[0].xy * sourceSize) + vec2(0.5)) * texelSize;
+				#define SAMPLE(x, y) texture2D(screenTexture, base + vec2(x, y) * texelSize).rgb
+				vec3 s[25];
+				s[21] = SAMPLE(-1.0, -2.0); s[22] = SAMPLE(0.0, -2.0); s[23] = SAMPLE(1.0, -2.0);
+				s[6] = SAMPLE(-1.0, -1.0); s[7] = SAMPLE(0.0, -1.0); s[8] = SAMPLE(1.0, -1.0);
+				s[5] = SAMPLE(-1.0, 0.0); s[0] = SAMPLE(0.0, 0.0); s[1] = SAMPLE(1.0, 0.0);
+				s[4] = SAMPLE(-1.0, 1.0); s[3] = SAMPLE(0.0, 1.0); s[2] = SAMPLE(1.0, 1.0);
+				s[15] = SAMPLE(-1.0, 2.0); s[14] = SAMPLE(0.0, 2.0); s[13] = SAMPLE(1.0, 2.0);
+				s[19] = SAMPLE(-2.0, -1.0); s[18] = SAMPLE(-2.0, 0.0); s[17] = SAMPLE(-2.0, 1.0);
+				s[9] = SAMPLE(2.0, -1.0); s[10] = SAMPLE(2.0, 0.0); s[11] = SAMPLE(2.0, 1.0);
+
+				float v[9];
+				for(int n = 0; n < 9; ++n)
+					v[n] = reduce(s[n]);
+
+				ivec4 blend = ivec4(0, 0, 0, 0);
+				if(!((v[0] == v[1] && v[3] == v[2]) || (v[0] == v[3] && v[1] == v[2])))
+				{
+					float d1 = colorDistance(s[4], s[0]) + colorDistance(s[0], s[8]) + colorDistance(s[14], s[2]) + colorDistance(s[2], s[10]) + 4.0 * colorDistance(s[3], s[1]);
+					float d2 = colorDistance(s[5], s[3]) + colorDistance(s[3], s[13]) + colorDistance(s[7], s[1]) + colorDistance(s[1], s[11]) + 4.0 * colorDistance(s[0], s[2]);
+					bool dominant = (DOMT * d1) < d2;
+					blend[2] = ((d1 < d2) && (v[0] != v[1]) && (v[0] != v[3])) ? (dominant ? BLEND_DOMINANT : BLEND_NORMAL) : BLEND_NONE;
+				}
+				if(!((v[5] == v[0] && v[4] == v[3]) || (v[5] == v[4] && v[0] == v[3])))
+				{
+					float d1 = colorDistance(s[17], s[5]) + colorDistance(s[5], s[7]) + colorDistance(s[15], s[3]) + colorDistance(s[3], s[1]) + 4.0 * colorDistance(s[4], s[0]);
+					float d2 = colorDistance(s[18], s[4]) + colorDistance(s[4], s[14]) + colorDistance(s[6], s[0]) + colorDistance(s[0], s[2]) + 4.0 * colorDistance(s[5], s[3]);
+					bool dominant = (DOMT * d2) < d1;
+					blend[3] = ((d2 < d1) && (v[0] != v[5]) && (v[0] != v[3])) ? (dominant ? BLEND_DOMINANT : BLEND_NORMAL) : BLEND_NONE;
+				}
+				if(!((v[7] == v[8] && v[0] == v[1]) || (v[7] == v[0] && v[8] == v[1])))
+				{
+					float d1 = colorDistance(s[5], s[7]) + colorDistance(s[7], s[23]) + colorDistance(s[3], s[1]) + colorDistance(s[1], s[9]) + 4.0 * colorDistance(s[0], s[8]);
+					float d2 = colorDistance(s[6], s[0]) + colorDistance(s[0], s[2]) + colorDistance(s[22], s[8]) + colorDistance(s[8], s[10]) + 4.0 * colorDistance(s[7], s[1]);
+					bool dominant = (DOMT * d2) < d1;
+					blend[1] = ((d2 < d1) && (v[0] != v[7]) && (v[0] != v[1])) ? (dominant ? BLEND_DOMINANT : BLEND_NORMAL) : BLEND_NONE;
+				}
+				if(!((v[6] == v[7] && v[5] == v[0]) || (v[6] == v[5] && v[7] == v[0])))
+				{
+					float d1 = colorDistance(s[18], s[6]) + colorDistance(s[6], s[22]) + colorDistance(s[4], s[0]) + colorDistance(s[0], s[8]) + 4.0 * colorDistance(s[5], s[7]);
+					float d2 = colorDistance(s[19], s[5]) + colorDistance(s[5], s[3]) + colorDistance(s[21], s[7]) + colorDistance(s[7], s[1]) + 4.0 * colorDistance(s[6], s[0]);
+					bool dominant = (DOMT * d1) < d2;
+					blend[0] = ((d1 < d2) && (v[0] != v[5]) && (v[0] != v[7])) ? (dominant ? BLEND_DOMINANT : BLEND_NORMAL) : BLEND_NONE;
+				}
+
+				vec3 dst[4];
+				dst[0] = s[0]; dst[1] = s[0]; dst[2] = s[0]; dst[3] = s[0];
+				if(blend[0] != BLEND_NONE || blend[1] != BLEND_NONE || blend[2] != BLEND_NONE || blend[3] != BLEND_NONE)
+				{
+					vec3 k[9];
+					k[0] = s[0]; k[1] = s[1]; k[2] = s[2]; k[3] = s[3]; k[4] = s[4]; k[5] = s[5]; k[6] = s[6]; k[7] = s[7]; k[8] = s[8];
+					scalePixel(blend.xyzw, k, dst);
+					k[1] = s[7]; k[2] = s[8]; k[3] = s[1]; k[4] = s[2]; k[5] = s[3]; k[6] = s[4]; k[7] = s[5]; k[8] = s[6];
+					rotateDst(dst); scalePixel(blend.wxyz, k, dst);
+					k[1] = s[5]; k[2] = s[6]; k[3] = s[7]; k[4] = s[8]; k[5] = s[1]; k[6] = s[2]; k[7] = s[3]; k[8] = s[4];
+					rotateDst(dst); scalePixel(blend.zwxy, k, dst);
+					k[1] = s[3]; k[2] = s[4]; k[3] = s[5]; k[4] = s[6]; k[5] = s[7]; k[6] = s[8]; k[7] = s[1]; k[8] = s[2];
+					rotateDst(dst); scalePixel(blend.yzwx, k, dst);
+					rotateDst(dst);
+				}
+
+				vec2 fp = fract(gl_TexCoord[0].xy * sourceSize);
+				vec3 result = fp.y < 0.5 ? (fp.x < 0.5 ? dst[0] : dst[1]) : (fp.x < 0.5 ? dst[3] : dst[2]);
+				gl_FragColor = vec4(result, 1.0);
+			}
+		)";
+
+		static constexpr const char * xsalFragmentShaderSource = R"(
+			#version 120
+
+			uniform sampler2D screenTexture;
+			uniform vec2 texelSize;
+			uniform vec2 sourceSize;
+
+			void main()
+			{
+				vec2 cTex = gl_TexCoord[0].xy * sourceSize * 1.00001;
+				#define SAMPLE(x, y) texture2D(screenTexture, (floor(cTex + vec2(x, y)) + vec2(0.5)) * texelSize)
+				vec4 c00 = SAMPLE(-0.25, -0.25);
+				vec4 c20 = SAMPLE( 0.25, -0.25);
+				vec4 c02 = SAMPLE(-0.25,  0.25);
+				vec4 c22 = SAMPLE( 0.25,  0.25);
+				vec4 dt = vec4(1.0);
+				float m1 = dot(abs(c00 - c22), dt) + 0.001;
+				float m2 = dot(abs(c02 - c20), dt) + 0.001;
+				gl_FragColor = (m1 * (c02 + c20) + m2 * (c22 + c00)) / (2.0 * (m1 + m2));
+			}
+		)";
+
+		const char * fragmentShaderSource = filter.rfind("xsal", 0) == 0 ? xsalFragmentShaderSource : xbrzFragmentShaderSource;
+
+		GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
+		GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
+		if(!vertexShader || !fragmentShader)
+			return;
+
+		program = glCreateProgram();
+		glAttachShader(program, vertexShader);
+		glAttachShader(program, fragmentShader);
+		glLinkProgram(program);
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+
+		GLint status = GL_FALSE;
+		glGetProgramiv(program, GL_LINK_STATUS, &status);
+		if(status != GL_TRUE)
+		{
+			logGlobal->warn("Failed to link GPU upscaling shader: %s", programLog(program));
+			glDeleteProgram(program);
+			program = 0;
+			return;
+		}
+
+		textureUniform = glGetUniformLocation(program, "screenTexture");
+		texelUniform = glGetUniformLocation(program, "texelSize");
+		sourceSizeUniform = glGetUniformLocation(program, "sourceSize");
+		logGlobal->debug("OpenGL GPU upscaling shader initialized");
+	}
+
+	~OpenGLGpuUpscaler()
+	{
+		if(midTexture)
+			glDeleteTextures(1, &midTexture);
+		if(midFramebuffer)
+			glDeleteFramebuffers(1, &midFramebuffer);
+		if(program)
+			glDeleteProgram(program);
+	}
+
+	bool available() const
+	{
+		return program != 0;
+	}
+
+	void renderQuad(float textureWidth, float textureHeight, bool flipY = false)
+	{
+		float top = flipY ? textureHeight : 0.0f;
+		float bottom = flipY ? 0.0f : textureHeight;
+
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, top); glVertex2f(0.0f, 0.0f);
+		glTexCoord2f(textureWidth, top); glVertex2f(1.0f, 0.0f);
+		glTexCoord2f(textureWidth, bottom); glVertex2f(1.0f, 1.0f);
+		glTexCoord2f(0.0f, bottom); glVertex2f(0.0f, 1.0f);
+		glEnd();
+	}
+
+	void setXbrzUniforms(const Point & sourceSize)
+	{
+		glUniform1i(textureUniform, 0);
+		glUniform2f(texelUniform, 1.0f / sourceSize.x, 1.0f / sourceSize.y);
+		glUniform2f(sourceSizeUniform, sourceSize.x, sourceSize.y);
+	}
+
+	bool render(SDL_Texture * texture, const Point & sourceSize, bool secondPass)
+	{
+		if(!available())
+			return false;
+		if(!ensureMidTexture(sourceSize * 2))
+			return false;
+
+		SDL_RenderFlush(mainRenderer);
+
+		float textureWidth = 0;
+		float textureHeight = 0;
+		if(SDL_GL_BindTexture(texture, &textureWidth, &textureHeight) != 0)
+		{
+			logGlobal->warn("OpenGL GPU upscaling disabled for this frame: %s", SDL_GetError());
+			return false;
+		}
+
+		GLint viewport[4] = {};
+		GLboolean blendEnabled = glIsEnabled(GL_BLEND);
+		GLboolean texture2dEnabled = glIsEnabled(GL_TEXTURE_2D);
+		glGetIntegerv(GL_VIEWPORT, viewport);
+
+		Point outputSize;
+		SDL_GetRendererOutputSize(mainRenderer, &outputSize.x, &outputSize.y);
+
+		glUseProgram(program);
+		glActiveTexture(GL_TEXTURE0);
+		glDisable(GL_BLEND);
+
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glOrtho(0.0, 1.0, 1.0, 0.0, -1.0, 1.0);
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, midFramebuffer);
+		glViewport(0, 0, midTextureSize.x, midTextureSize.y);
+		setXbrzUniforms(sourceSize);
+		renderQuad(textureWidth, textureHeight);
+		SDL_GL_UnbindTexture(texture);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, outputSize.x, outputSize.y);
+		glBindTexture(GL_TEXTURE_2D, midTexture);
+		if(secondPass)
+			setXbrzUniforms(midTextureSize);
+		else
+		{
+			glUseProgram(0);
+			glEnable(GL_TEXTURE_2D);
+		}
+		renderQuad(1.0f, 1.0f, true);
+
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glUseProgram(0);
+		if(!texture2dEnabled)
+			glDisable(GL_TEXTURE_2D);
+		if(blendEnabled)
+			glEnable(GL_BLEND);
+		glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+
+		return true;
+	}
+};
 
 std::tuple<int, int> ScreenHandler::getSupportedScalingRange() const
 {
@@ -354,6 +897,10 @@ void ScreenHandler::initializeWindow()
 	SDL_RendererInfo info;
 	SDL_GetRendererInfo(mainRenderer, &info);
 	logGlobal->info("Created renderer %s", info.name);
+
+	const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
+	if((gpuFilter == "xbrz2" || gpuFilter == "xbrz4" || gpuFilter == "xsal2" || gpuFilter == "xsal4") && std::string(info.name) == "opengl")
+		gpuUpscaler = std::make_unique<OpenGLGpuUpscaler>(gpuFilter);
 }
 
 EUpscalingFilter ScreenHandler::loadUpscalingFilter() const
@@ -620,6 +1167,8 @@ void ScreenHandler::destroyScreenBuffers()
 		SDL_DestroyTexture(screenTexture);
 		screenTexture = nullptr;
 	}
+
+	gpuUpscaler.reset();
 }
 
 void ScreenHandler::destroyWindow()
@@ -679,7 +1228,17 @@ void ScreenHandler::updateScreenTexture()
 void ScreenHandler::presentScreenTexture()
 {
 	SDL_RenderClear(mainRenderer);
-	SDL_RenderCopy(mainRenderer, screenTexture, nullptr, nullptr);
+
+	bool renderedWithGpuUpscaler = false;
+	if(gpuUpscaler && gpuUpscaler->available())
+	{
+		const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
+		renderedWithGpuUpscaler = gpuUpscaler->render(screenTexture, Point(screen->w, screen->h), gpuFilter == "xbrz4" || gpuFilter == "xsal4");
+	}
+
+	if(!renderedWithGpuUpscaler)
+		SDL_RenderCopy(mainRenderer, screenTexture, nullptr, nullptr);
+
 	ENGINE->cursor().render();
 	SDL_RenderPresent(mainRenderer);
 }

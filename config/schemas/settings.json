@@ -227,6 +227,7 @@
 				"cursorScalingFactor",
 				"fontScalingFactor",
 				"upscalingFilter",
+				"gpuUpscalingFilter",
 				"fontUpscalingFilter",
 				"downscalingFilter",
 				"allowPortrait",
@@ -320,6 +321,11 @@
 					"type" : "string",
 					"enum" : [ "auto", "none", "xbrz2", "xbrz3", "xbrz4" ],
 					"default" : "auto"
+				},
+				"gpuUpscalingFilter" : {
+					"type" : "string",
+					"enum" : [ "xbrz2", "xbrz4", "xsal2", "xsal4" ],
+					"default" : "xbrz4"
 				},
 				"downscalingFilter" : {
 					"type" : "string",
