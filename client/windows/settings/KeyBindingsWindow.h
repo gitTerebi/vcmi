@@ -68,11 +68,16 @@ private:
 	std::shared_ptr<CTextBox> text;
 
 	std::string id;
+	std::string inputText;
+	uint32_t escapePressedAt;
 	std::function<void(const std::string & id, const std::string & keyName)> func;
 
+	void clearBinding();
+	void updateClearingCountdown();
+	void keyPressed(const std::string & keyName) override;
 	void keyReleased(const std::string & keyName) override;
+	void tick(uint32_t msPassed) override;
 	void notFocusedClick() override;
 public:
 	KeyBindingsEditWindow(const std::string & id, std::function<void(const std::string & id, const std::string & keyName)> func);
 };
-
