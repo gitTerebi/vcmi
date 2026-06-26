@@ -427,8 +427,9 @@ void CLobbyScreen::updateAfterStateChange()
 	{
 		bool isMultiplayer = GAME->server().loadMode == ELoadMode::MULTI;
 		ExtraOptionsInfo info = SEL->getStartInfo()->extraOptionsInfo;
+		const JsonNode & unlimitedReplaySetting = persistentStorage["startExtraOptions"][isMultiplayer ? "multiPlayer" : "singlePlayer"]["unlimitedReplay"];
 		info.cheatsAllowed = isMultiplayer ? persistentStorage["startExtraOptions"]["multiPlayer"]["cheatsAllowed"].Bool() : !persistentStorage["startExtraOptions"]["singlePlayer"]["cheatsNotAllowed"].Bool();
-		info.unlimitedReplay = persistentStorage["startExtraOptions"][isMultiplayer ? "multiPlayer" : "singlePlayer"]["unlimitedReplay"].Bool();
+		info.unlimitedReplay = unlimitedReplaySetting.isNull() ? true : unlimitedReplaySetting.Bool();
 		if(info.cheatsAllowed != GAME->server().si->extraOptionsInfo.cheatsAllowed || info.unlimitedReplay != GAME->server().si->extraOptionsInfo.unlimitedReplay)
 			GAME->server().setExtraOptionsInfo(info);
 	}

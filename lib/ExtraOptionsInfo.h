@@ -15,7 +15,7 @@ VCMI_LIB_NAMESPACE_BEGIN
 struct DLL_LINKAGE ExtraOptionsInfo
 {
 	bool cheatsAllowed = true;
-	bool unlimitedReplay = false;
+	bool unlimitedReplay = true;
 
 	bool operator == (const ExtraOptionsInfo & other) const;
 
