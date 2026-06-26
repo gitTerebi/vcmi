@@ -61,6 +61,10 @@ AdventureMapInterface::AdventureMapInterface():
 	spellBeingCasted(nullptr),
 	scrollingWasActive(false),
 	scrollingWasBlocked(false),
+	keyboardScrollUp(false),
+	keyboardScrollDown(false),
+	keyboardScrollLeft(false),
+	keyboardScrollRight(false),
 	backgroundDimLevel(settings["adventure"]["backgroundDimLevel"].Integer())
 {
 	OBJECT_CONSTRUCTION;
@@ -202,6 +206,7 @@ void AdventureMapInterface::dim(Canvas & to)
 void AdventureMapInterface::tick(uint32_t msPassed)
 {
 	handleMapScrollingUpdate(msPassed);
+	handleKeyboardMapScrollingUpdate(msPassed);
 
 	// we want animations to be active during enemy turn but map itself to be non-interactive
 	// so call timer update directly on inactive element
@@ -287,6 +292,37 @@ void AdventureMapInterface::handleMapScrollingUpdate(uint32_t timePassed)
 	scrollingWasActive = scrollingActive;
 }
 
+void AdventureMapInterface::handleKeyboardMapScrollingUpdate(uint32_t timePassed)
+{
+	Point keyboardScrollDirection = getKeyboardScrollDirection();
+
+	if(keyboardScrollDirection == Point(0, 0))
+		return;
+
+	if(!shortcuts->optionMapScrollingActive())
+		return;
+
+	int32_t scrollSpeedPixels = settings["adventure"]["scrollSpeedPixels"].Float();
+	int32_t scrollDistance = scrollSpeedPixels * timePassed / 1000;
+	Point scrollDelta = keyboardScrollDirection * scrollDistance;
+
+	if(scrollDelta != Point(0, 0))
+		widget->getMapView()->onMapScrolled(scrollDelta);
+}
+
+Point AdventureMapInterface::getKeyboardScrollDirection() const
+{
+	Point direction;
+
+	if(keyboardScrollUp != keyboardScrollDown)
+		direction.y = keyboardScrollUp ? -1 : +1;
+
+	if(keyboardScrollLeft != keyboardScrollRight)
+		direction.x = keyboardScrollLeft ? -1 : +1;
+
+	return direction;
+}
+
 void AdventureMapInterface::centerOnTile(int3 on)
 {
 	widget->getMapView()->onCenteredTile(on);
@@ -299,12 +335,32 @@ void AdventureMapInterface::centerOnObject(const CGObjectInstance * obj)
 
 void AdventureMapInterface::keyPressed(EShortcut key)
 {
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_UP)
+		keyboardScrollUp = true;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_DOWN)
+		keyboardScrollDown = true;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_LEFT)
+		keyboardScrollLeft = true;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_RIGHT)
+		keyboardScrollRight = true;
 	if (key == EShortcut::GLOBAL_CANCEL && spellBeingCasted)
 		hotkeyAbortCastingMode();
 	if (key == EShortcut::GLOBAL_CANCEL && getState() == EAdventureState::DISEMBARKING)
 		exitDisembarkMode();
 	//fake mouse use to trigger onTileHovered()
 	ENGINE->fakeMouseMove();
+}
+
+void AdventureMapInterface::keyReleased(EShortcut key)
+{
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_UP)
+		keyboardScrollUp = false;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_DOWN)
+		keyboardScrollDown = false;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_LEFT)
+		keyboardScrollLeft = false;
+	if (key == EShortcut::ADVENTURE_SCROLL_MAP_RIGHT)
+		keyboardScrollRight = false;
 }
 
 void AdventureMapInterface::onSelectionChanged(const CArmedInstance *sel)

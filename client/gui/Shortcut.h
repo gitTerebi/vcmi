@@ -141,6 +141,7 @@ enum class EShortcut
 	ADVENTURE_VISIT_OBJECT, // Revisits object hero is standing on
 	ADVENTURE_VIEW_SELECTED,// Open window with currently selected hero/town
 	ADVENTURE_NEXT_TOWN,
+	ADVENTURE_ENTER_NEXT_TOWN,
 	ADVENTURE_NEXT_HERO,
 	ADVENTURE_NEXT_OBJECT,  // context-sensitive next object - select next hero/town, depending on current selection
 	ADVENTURE_FIRST_TOWN,   // select first available town in the list
@@ -178,6 +179,10 @@ enum class EShortcut
 	ADVENTURE_SEARCH_CONTINUE,
 	ADVENTURE_DISEMBARK,
 	ADVENTURE_OPEN_WIKI, // Opens the in-game Glossary / Wiki window
+	ADVENTURE_SCROLL_MAP_UP,
+	ADVENTURE_SCROLL_MAP_DOWN,
+	ADVENTURE_SCROLL_MAP_LEFT,
+	ADVENTURE_SCROLL_MAP_RIGHT,
 
 	// Move hero one tile in specified direction. Bound to cursors & numpad buttons
 	ADVENTURE_MOVE_HERO_SW,

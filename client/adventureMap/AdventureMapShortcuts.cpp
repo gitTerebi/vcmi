@@ -113,6 +113,7 @@ std::vector<AdventureMapShortcutState> AdventureMapShortcuts::getShortcuts()
 		{ EShortcut::ADVENTURE_ZOOM_RESET,       optionSidePanelActive(),[this]() { this->zoom( 0); } },
 		{ EShortcut::ADVENTURE_FIRST_TOWN,       optionInMapView(),      [this]() { this->firstTown(); } },
 		{ EShortcut::ADVENTURE_NEXT_TOWN,        optionInMapView(),      [this]() { this->nextTown(); } },
+		{ EShortcut::ADVENTURE_ENTER_NEXT_TOWN,  optionInMapView(),      [this]() { this->enterNextTown(); } },
 		{ EShortcut::ADVENTURE_NEXT_OBJECT,      optionInMapView(),      [this]() { this->nextObject(); } },
 		{ EShortcut::ADVENTURE_MOVE_HERO_SW,     optionHeroSelected(),   [this]() { this->moveHeroDirectional({-1, +1}); } },
 		{ EShortcut::ADVENTURE_MOVE_HERO_SS,     optionHeroSelected(),   [this]() { this->moveHeroDirectional({ 0, +1}); } },
@@ -126,6 +127,10 @@ std::vector<AdventureMapShortcutState> AdventureMapShortcuts::getShortcuts()
 		{ EShortcut::ADVENTURE_SEARCH_CONTINUE,  optionSidePanelActive(),[this]() { this->search(true); } },
 		{ EShortcut::ADVENTURE_DISEMBARK,        optionCanDisembark(),   [this]() { this->enterDisembarkMode(); } },
 		{ EShortcut::ADVENTURE_OPEN_WIKI,        optionInMapView(),      [this]() { this->showWiki(); } },
+		{ EShortcut::ADVENTURE_SCROLL_MAP_UP,    optionMapScrollingActive(), [](){} },
+		{ EShortcut::ADVENTURE_SCROLL_MAP_DOWN,  optionMapScrollingActive(), [](){} },
+		{ EShortcut::ADVENTURE_SCROLL_MAP_LEFT,  optionMapScrollingActive(), [](){} },
+		{ EShortcut::ADVENTURE_SCROLL_MAP_RIGHT, optionMapScrollingActive(), [](){} },
 		{ EShortcut::MAIN_MENU_LOBBY,            optionLobbyActive(),    [    ]() { ENGINE->user().onGlobalLobbyInterfaceActivated(); } }
 	};
 	return result;
@@ -496,6 +501,14 @@ void AdventureMapShortcuts::firstTown()
 void AdventureMapShortcuts::nextTown()
 {
 	owner.hotkeyNextTown();
+}
+
+void AdventureMapShortcuts::enterNextTown()
+{
+	nextTown();
+
+	if(const CGTownInstance * town = GAME->interface()->localState->getCurrentTown())
+		GAME->interface()->openTownWindow(town);
 }
 
 void AdventureMapShortcuts::zoom( int distance)
