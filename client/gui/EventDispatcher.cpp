@@ -80,6 +80,10 @@ void EventDispatcher::dispatchShortcutPressed(const std::vector<EShortcut> & sho
 {
 	bool keysCaptured = false;
 
+	for(EShortcut shortcut : shortcutsVector)
+		if(shortcut != EShortcut::NONE)
+			pressedShortcuts.insert(shortcut);
+
 	if (vstd::contains(shortcutsVector, EShortcut::MOUSE_LEFT))
 		dispatchMouseLeftButtonPressed(ENGINE->getCursorPosition(), settings["input"]["shortcutToleranceDistance"].Integer());
 
@@ -109,6 +113,9 @@ void EventDispatcher::dispatchShortcutReleased(const std::vector<EShortcut> & sh
 {
 	bool keysCaptured = false;
 
+	for(EShortcut shortcut : shortcutsVector)
+		pressedShortcuts.erase(shortcut);
+
 	if (vstd::contains(shortcutsVector, EShortcut::MOUSE_LEFT))
 		dispatchMouseLeftButtonReleased(ENGINE->getCursorPosition(), settings["input"]["shortcutToleranceDistance"].Integer());
 
@@ -132,6 +139,11 @@ void EventDispatcher::dispatchShortcutReleased(const std::vector<EShortcut> & sh
 					return;
 			}
 	}
+}
+
+bool EventDispatcher::isShortcutPressed(EShortcut shortcut) const
+{
+	return pressedShortcuts.count(shortcut) != 0;
 }
 
 void EventDispatcher::dispatchKeyPressed(const std::string & keyName)

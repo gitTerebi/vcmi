@@ -496,6 +496,7 @@
 	"vcmi.keyBindings.keyBinding.adventureNextObject": "Adventure next object",
 	"vcmi.keyBindings.keyBinding.adventureNextTown": "Adventure next town",
 	"vcmi.keyBindings.keyBinding.adventureEnterNextTown": "Adventure enter next town",
+	"vcmi.keyBindings.keyBinding.adventureOverlay": "Adventure overlay",
 	"vcmi.keyBindings.keyBinding.adventureQuestLog": "Adventure quest log",
 	"vcmi.keyBindings.keyBinding.adventureQuickLoad": "Adventure quick load",
 	"vcmi.keyBindings.keyBinding.adventureQuickSave": "Adventure quick save",

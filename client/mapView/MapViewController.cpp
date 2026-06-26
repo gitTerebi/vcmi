@@ -20,6 +20,8 @@
 #include "../adventureMap/AdventureMapInterface.h"
 #include "../GameEngine.h"
 #include "../GameInstance.h"
+#include "../gui/EventDispatcher.h"
+#include "../gui/Shortcut.h"
 #include "../gui/WindowHandler.h"
 #include "../eventsSDL/InputHandler.h"
 
@@ -234,7 +236,7 @@ void MapViewController::updateState()
 		adventureContext->settingShowVisitable = settings["session"]["showVisitable"].Bool();
 		adventureContext->settingShowBlocked = settings["session"]["showBlocked"].Bool();
 		adventureContext->settingShowInvisible = settings["session"]["showInvisible"].Bool();
-		adventureContext->settingTextOverlay = (ENGINE->isKeyboardAltDown() || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
+		adventureContext->settingTextOverlay = (ENGINE->events().isShortcutPressed(EShortcut::ADVENTURE_OVERLAY) || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
 	}
 }
 

@@ -10,6 +10,7 @@
 		"adventureFirstHero":       "Ctrl+H",
 		"adventureFirstTown":       "Ctrl+T",
 		"adventureGameOptions":     "O",
+		"adventureOverlay":         [ "Left Shift", "Right Shift" ],
 		"adventureKingdomOverview": "K",
 		"adventureLoadGame":        "L",
 		"adventureMainMenu":        "Ctrl+M",

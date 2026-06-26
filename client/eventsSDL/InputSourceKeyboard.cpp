@@ -36,6 +36,10 @@ InputSourceKeyboard::InputSourceKeyboard()
 std::string InputSourceKeyboard::getKeyNameWithModifiers(const std::string & keyName, bool keyUp)
 {
 	std::string result;
+	const bool keyIsModifier = keyName == "Left Ctrl" || keyName == "Right Ctrl" ||
+		keyName == "Left Alt" || keyName == "Right Alt" ||
+		keyName == "Left Shift" || keyName == "Right Shift" ||
+		keyName == "Left GUI" || keyName == "Right GUI";
 
 	if(!keyUp)
 	{
@@ -44,11 +48,11 @@ std::string InputSourceKeyboard::getKeyNameWithModifiers(const std::string & key
 		wasKeyboardShiftDown = isKeyboardShiftDown();
 	}
 
-	if (wasKeyboardCtrlDown)
+	if (!keyIsModifier && wasKeyboardCtrlDown)
 		result += "Ctrl+";
-	if (wasKeyboardAltDown)
+	if (!keyIsModifier && wasKeyboardAltDown)
 		result += "Alt+";
-	if (wasKeyboardShiftDown)
+	if (!keyIsModifier && wasKeyboardShiftDown)
 		result += "Shift+";
 	result += keyName;
 

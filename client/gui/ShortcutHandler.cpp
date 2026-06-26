@@ -182,6 +182,7 @@ EShortcut ShortcutHandler::findShortcut(const std::string & identifier ) const
 		{"adventureThievesGuild",    EShortcut::ADVENTURE_THIEVES_GUILD   },
 		{"gameActivateConsole",      EShortcut::GAME_ACTIVATE_CONSOLE     },
 		{"adventureGameOptions",     EShortcut::ADVENTURE_GAME_OPTIONS    },
+		{"adventureOverlay",         EShortcut::ADVENTURE_OVERLAY         },
 		{"adventureToggleGrid",      EShortcut::ADVENTURE_TOGGLE_GRID     },
 		{"adventureToggleVisitable", EShortcut::ADVENTURE_TOGGLE_VISITABLE},
 		{"adventureToggleBlocked",   EShortcut::ADVENTURE_TOGGLE_BLOCKED  },

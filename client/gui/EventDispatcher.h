@@ -9,6 +9,8 @@
  */
 #pragma once
 
+#include <set>
+
 VCMI_LIB_NAMESPACE_BEGIN
 class Point;
 VCMI_LIB_NAMESPACE_END
@@ -38,6 +40,7 @@ class EventDispatcher
 	EventReceiversList panningInterested;
 	EventReceiversList inputModeChangeInterested;
 	EventReceiversList keyNameInterested;
+	std::set<EShortcut> pressedShortcuts;
 
 	void handleLeftButtonClick(const Point & position, int tolerance, bool isPressed);
 	void handleDoubleButtonClick(const Point & position, int tolerance);
@@ -59,6 +62,7 @@ public:
 	/// Shortcut events (e.g. keyboard keys)
 	void dispatchShortcutPressed(const std::vector<EShortcut> & shortcuts);
 	void dispatchShortcutReleased(const std::vector<EShortcut> & shortcuts);
+	bool isShortcutPressed(EShortcut shortcut) const;
 
 	/// Key events (to get keyname of pressed key)
 	void dispatchKeyPressed(const std::string & keyName);

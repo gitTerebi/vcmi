@@ -22,6 +22,7 @@
 #include "../GameInstance.h"
 #include "../PlayerLocalState.h"
 
+#include "../gui/EventDispatcher.h"
 #include "../gui/Shortcut.h"
 #include "../gui/WindowHandler.h"
 #include "../eventsSDL/InputHandler.h"
@@ -309,7 +310,7 @@ void CBuildingRect::show(Canvas & to)
 {
 	uint32_t stageDelay = BUILDING_APPEAR_TIMEPOINT;
 
-	bool showTextOverlay = (ENGINE->isKeyboardAltDown() || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
+	bool showTextOverlay = (ENGINE->events().isShortcutPressed(EShortcut::ADVENTURE_OVERLAY) || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
 
 	if(stateTimeCounter < BUILDING_APPEAR_TIMEPOINT)
 	{
@@ -845,7 +846,7 @@ void CCastleBuildings::show(Canvas & to)
 {
 	CIntObject::show(to);
 
-	bool showTextOverlay = (ENGINE->isKeyboardAltDown() || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
+	bool showTextOverlay = (ENGINE->events().isShortcutPressed(EShortcut::ADVENTURE_OVERLAY) || ENGINE->input().getNumTouchFingers() == 2) && settings["general"]["enableOverlay"].Bool();
 	if(showTextOverlay)
 		drawOverlays(to, buildings);
 }
