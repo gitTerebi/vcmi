@@ -14,6 +14,7 @@
 #include "../../CPlayerInterface.h"
 #include "../../GameEngine.h"
 #include "../../GameInstance.h"
+#include "../../eventsSDL/InputHandler.h"
 #include "../../gui/Shortcut.h"
 #include "../../gui/ShortcutHandler.h"
 #include "../../gui/WindowHandler.h"
@@ -90,6 +91,12 @@ void KeyBindingsWindow::fillList(int start)
 			{
 				if(i >= start)
 					listElements.push_back(std::make_shared<KeyBindingElement>(elem.first, elem.second, listElements.size(), [this, group](const std::string & id, const std::string & keyName){
+						if(keyName.empty())
+						{
+							setKeyBinding(id, group->first, keyName, false);
+							return;
+						}
+
 						auto str = MetaString::createFromTextID("vcmi.keyBindings.inputSet");
 						str.replaceTextID("vcmi.keyBindings.keyBinding." + id);
 						str.replaceRawString(keyName);
@@ -216,6 +223,8 @@ void KeyBindingElement::showPopupWindow(const Point & cursorPosition)
 KeyBindingsEditWindow::KeyBindingsEditWindow(const std::string & id, std::function<void(const std::string & id, const std::string & keyName)> func)
 	: CWindowObject(BORDERED)
 	, id(id)
+	, inputText()
+	, escapePressedAt(0)
 	, func(func)
 {
 	OBJECT_CONSTRUCTION;
@@ -224,22 +233,71 @@ KeyBindingsEditWindow::KeyBindingsEditWindow(const std::string & id, std::functi
 
 	auto str = MetaString::createFromTextID("vcmi.keyBindings.input");
 	str.replaceTextID("vcmi.keyBindings.keyBinding." + id);
+	inputText = str.toString();
 
 	backgroundTexture = std::make_shared<CFilledTexture>(ImagePath::builtin("DiBoxBck"), Rect(0, 0, pos.w, pos.h));
-	text = std::make_shared<CTextBox>(str.toString(), Rect(0, 0, 250, 150), 0, FONT_MEDIUM, ETextAlignment::CENTER, Colors::WHITE);
+	text = std::make_shared<CTextBox>(inputText, Rect(0, 0, 250, 150), 0, FONT_MEDIUM, ETextAlignment::CENTER, Colors::WHITE);
 
 	updateShadow();
 	center();
 
-	addUsedEvents(LCLICK | KEY_NAME);
+	addUsedEvents(LCLICK | KEY_NAME | TIME);
+}
+
+void KeyBindingsEditWindow::clearBinding()
+{
+	close();
+	func(id, "");
+}
+
+void KeyBindingsEditWindow::updateClearingCountdown()
+{
+	if(escapePressedAt == 0)
+		return;
+
+	static constexpr uint32_t clearBindingHoldTimeMilliseconds = 1000;
+	uint32_t timeHeld = ENGINE->input().getTicks() - escapePressedAt;
+	if(timeHeld >= clearBindingHoldTimeMilliseconds)
+	{
+		escapePressedAt = 0;
+		clearBinding();
+		return;
+	}
+
+	uint32_t secondsRemaining = (clearBindingHoldTimeMilliseconds - timeHeld + 999) / 1000;
+	auto str = MetaString::createFromTextID("vcmi.keyBindings.clearing");
+	str.replaceRawString(std::to_string(secondsRemaining));
+	text->setText(str.toString());
+}
+
+void KeyBindingsEditWindow::keyPressed(const std::string & keyName)
+{
+	if(keyName == "Escape")
+	{
+		escapePressedAt = ENGINE->input().getTicks();
+		updateClearingCountdown();
+	}
 }
 
 void KeyBindingsEditWindow::keyReleased(const std::string & keyName)
 {
 	if(boost::algorithm::ends_with(keyName, "Ctrl") || boost::algorithm::ends_with(keyName, "Shift") || boost::algorithm::ends_with(keyName, "Alt")) // skip if only control key pressed
 		return;
+
+	if(keyName == "Escape")
+	{
+		if(escapePressedAt != 0)
+			text->setText(inputText);
+		escapePressedAt = 0;
+	}
+
 	close();
 	func(id, keyName);
+}
+
+void KeyBindingsEditWindow::tick(uint32_t)
+{
+	updateClearingCountdown();
 }
 
 void KeyBindingsEditWindow::notFocusedClick()
