@@ -59,6 +59,11 @@ private:
 	/// if true, then scrolling was blocked via ctrl and should not restart until player move cursor outside scrolling area
 	bool scrollingWasBlocked;
 
+	bool keyboardScrollUp;
+	bool keyboardScrollDown;
+	bool keyboardScrollLeft;
+	bool keyboardScrollRight;
+
 	/// how much should the background dimmed, when windows are on the top
 	int backgroundDimLevel;
 
@@ -79,6 +84,8 @@ private:
 
 	/// check and if necessary reacts on scrolling by moving cursor to screen edge
 	void handleMapScrollingUpdate(uint32_t msPassed);
+	void handleKeyboardMapScrollingUpdate(uint32_t msPassed);
+	Point getKeyboardScrollDirection() const;
 
 	void showMoveDetailsInStatusbar(const CGHeroInstance & hero, const CGPathNode & pathNode);
 
@@ -115,6 +122,7 @@ protected:
 	void showAll(Canvas & to) override;
 
 	void keyPressed(EShortcut key) override;
+	void keyReleased(EShortcut key) override;
 
 	void onScreenResize() override;
 

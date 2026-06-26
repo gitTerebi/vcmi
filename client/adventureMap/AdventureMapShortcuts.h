@@ -78,6 +78,7 @@ class AdventureMapShortcuts
 	void showMarketplace();
 	void firstTown();
 	void nextTown();
+	void enterNextTown();
 	void nextObject();
 	void zoom( int distance);
 	void search(bool next);
