@@ -265,7 +265,7 @@ class OpenGLGpuUpscaler
 
 		if(!complete)
 		{
-			logGlobal->warn("OpenGL GPU xBRZ4 disabled: intermediate framebuffer is incomplete");
+			logGlobal->warn("OpenGL GPU upscaling disabled: intermediate framebuffer is incomplete");
 			return false;
 		}
 
@@ -273,7 +273,7 @@ class OpenGLGpuUpscaler
 	}
 
 public:
-	OpenGLGpuUpscaler()
+	OpenGLGpuUpscaler(const std::string & filter)
 	{
 		if(!loadFunctions())
 		{
@@ -290,7 +290,7 @@ public:
 			}
 		)";
 
-		static constexpr const char * fragmentShaderSource = R"(
+		static constexpr const char * xbrzFragmentShaderSource = R"(
 			#version 120
 			#define BLEND_NONE 0
 			#define BLEND_NORMAL 1
@@ -432,6 +432,30 @@ public:
 			}
 		)";
 
+		static constexpr const char * xsalFragmentShaderSource = R"(
+			#version 120
+
+			uniform sampler2D screenTexture;
+			uniform vec2 texelSize;
+			uniform vec2 sourceSize;
+
+			void main()
+			{
+				vec2 cTex = gl_TexCoord[0].xy * sourceSize * 1.00001;
+				#define SAMPLE(x, y) texture2D(screenTexture, (floor(cTex + vec2(x, y)) + vec2(0.5)) * texelSize)
+				vec4 c00 = SAMPLE(-0.25, -0.25);
+				vec4 c20 = SAMPLE( 0.25, -0.25);
+				vec4 c02 = SAMPLE(-0.25,  0.25);
+				vec4 c22 = SAMPLE( 0.25,  0.25);
+				vec4 dt = vec4(1.0);
+				float m1 = dot(abs(c00 - c22), dt) + 0.001;
+				float m2 = dot(abs(c02 - c20), dt) + 0.001;
+				gl_FragColor = (m1 * (c02 + c20) + m2 * (c22 + c00)) / (2.0 * (m1 + m2));
+			}
+		)";
+
+		const char * fragmentShaderSource = filter.rfind("xsal", 0) == 0 ? xsalFragmentShaderSource : xbrzFragmentShaderSource;
+
 		GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
 		GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
 		if(!vertexShader || !fragmentShader)
@@ -457,7 +481,7 @@ public:
 		textureUniform = glGetUniformLocation(program, "screenTexture");
 		texelUniform = glGetUniformLocation(program, "texelSize");
 		sourceSizeUniform = glGetUniformLocation(program, "sourceSize");
-		logGlobal->debug("OpenGL GPU xBRZ4 upscaling shader initialized");
+		logGlobal->debug("OpenGL GPU upscaling shader initialized");
 	}
 
 	~OpenGLGpuUpscaler()
@@ -495,7 +519,7 @@ public:
 		glUniform2f(sourceSizeUniform, sourceSize.x, sourceSize.y);
 	}
 
-	bool render(SDL_Texture * texture, const Point & sourceSize)
+	bool render(SDL_Texture * texture, const Point & sourceSize, bool secondPass)
 	{
 		if(!available())
 			return false;
@@ -514,6 +538,7 @@ public:
 
 		GLint viewport[4] = {};
 		GLboolean blendEnabled = glIsEnabled(GL_BLEND);
+		GLboolean texture2dEnabled = glIsEnabled(GL_TEXTURE_2D);
 		glGetIntegerv(GL_VIEWPORT, viewport);
 
 		Point outputSize;
@@ -540,7 +565,13 @@ public:
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, outputSize.x, outputSize.y);
 		glBindTexture(GL_TEXTURE_2D, midTexture);
-		setXbrzUniforms(midTextureSize);
+		if(secondPass)
+			setXbrzUniforms(midTextureSize);
+		else
+		{
+			glUseProgram(0);
+			glEnable(GL_TEXTURE_2D);
+		}
 		renderQuad(1.0f, 1.0f, true);
 
 		glMatrixMode(GL_MODELVIEW);
@@ -548,6 +579,8 @@ public:
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glUseProgram(0);
+		if(!texture2dEnabled)
+			glDisable(GL_TEXTURE_2D);
 		if(blendEnabled)
 			glEnable(GL_BLEND);
 		glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
@@ -865,8 +898,9 @@ void ScreenHandler::initializeWindow()
 	SDL_GetRendererInfo(mainRenderer, &info);
 	logGlobal->info("Created renderer %s", info.name);
 
-	if(settings["video"]["gpuUpscalingFilter"].String() == "xbrz4" && std::string(info.name) == "opengl")
-		gpuUpscaler = std::make_unique<OpenGLGpuUpscaler>();
+	const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
+	if((gpuFilter == "xbrz2" || gpuFilter == "xbrz4" || gpuFilter == "xsal2" || gpuFilter == "xsal4") && std::string(info.name) == "opengl")
+		gpuUpscaler = std::make_unique<OpenGLGpuUpscaler>(gpuFilter);
 }
 
 EUpscalingFilter ScreenHandler::loadUpscalingFilter() const
@@ -1197,7 +1231,10 @@ void ScreenHandler::presentScreenTexture()
 
 	bool renderedWithGpuUpscaler = false;
 	if(gpuUpscaler && gpuUpscaler->available())
-		renderedWithGpuUpscaler = gpuUpscaler->render(screenTexture, Point(screen->w, screen->h));
+	{
+		const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
+		renderedWithGpuUpscaler = gpuUpscaler->render(screenTexture, Point(screen->w, screen->h), gpuFilter == "xbrz4" || gpuFilter == "xsal4");
+	}
 
 	if(!renderedWithGpuUpscaler)
 		SDL_RenderCopy(mainRenderer, screenTexture, nullptr, nullptr);
