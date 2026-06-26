@@ -1,0 +1,2325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="vi">
+<context>
+    <name>AboutProjectView</name>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="22"/>
+        <source>VCMI on Discord</source>
+        <translation>VCMI trên Discord</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="29"/>
+        <source>Have a question? Found a bug? Want to help? Join us!</source>
+        <translation>Có thắc mắc? Gặp lỗi hoặc cần giúp đỡ? Liên hệ với chúng tôi!</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="36"/>
+        <source>VCMI on Github</source>
+        <translation>VCMI trên Github</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="54"/>
+        <source>Our Community</source>
+        <translation>Cộng đồng</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="220"/>
+        <source>Build Information</source>
+        <translation>Thông tin bản dựng</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="182"/>
+        <source>User data directory</source>
+        <translation>Đường dẫn dữ liệu người dùng</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="88"/>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="95"/>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="161"/>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="247"/>
+        <source>Open</source>
+        <translation>Mở</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="121"/>
+        <source>Check for updates</source>
+        <translation>Kiểm tra cập nhật</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="189"/>
+        <source>Game version</source>
+        <translation>Phiên bản trò chơi</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="114"/>
+        <source>Log files directory</source>
+        <translation>Đường dẫn tập tin nhật ký</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="107"/>
+        <source>Data Directories</source>
+        <translation>Đường dẫn dữ liệu</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="168"/>
+        <source>Game data directory</source>
+        <translation>Đường dẫn dữ liệu trò chơi</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="175"/>
+        <source>Operating System</source>
+        <translation>Hệ điều hành</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="227"/>
+        <source>Configuration files directory</source>
+        <translation>Đường dẫn tập tin cấu hình</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="290"/>
+        <source>Project homepage</source>
+        <translation>Trang chủ</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="303"/>
+        <source>Report a bug</source>
+        <translation>Báo lỗi</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.ui" line="316"/>
+        <source>Export logs</source>
+        <translation type="unfinished">Xuất nhật ký</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="170"/>
+        <source>Save logs</source>
+        <translation type="unfinished">Lưu nhật ký</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="170"/>
+        <source>Zip archives (*.zip)</source>
+        <translation type="unfinished">Lưu trữ ZIP (*.zip)</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="272"/>
+        <source>Error</source>
+        <translation type="unfinished">Lỗi</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="272"/>
+        <source>Failed to create archive: %1</source>
+        <translation type="unfinished">Không thể tạo gói lưu trữ: %1</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="277"/>
+        <source>Send logs</source>
+        <translation type="unfinished">Gửi nhật ký</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="277"/>
+        <source>The archive will be sent via another application. Share your logs e.g. over discord to developers.</source>
+        <translation type="unfinished">Gói lưu trữ sẽ được gửi qua ứng dụng khác. Hãy chia sẻ nhật ký của bạn, ví dụ qua Discord, cho các nhà phát triển.</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="281"/>
+        <source>Success</source>
+        <translation type="unfinished">Thành công</translation>
+    </message>
+    <message>
+        <location filename="../aboutProject/aboutproject_moc.cpp" line="281"/>
+        <source>Logs saved to %1, please send them to the developers</source>
+        <translation type="unfinished">Nhật ký đã được lưu vào %1, vui lòng gửi cho các nhà phát triển</translation>
+    </message>
+</context>
+<context>
+    <name>CModListView</name>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="43"/>
+        <source>Filter</source>
+        <translation>Bộ lọc</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="69"/>
+        <source>All mods</source>
+        <translation>Tất cả mods</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="74"/>
+        <source>Downloadable</source>
+        <translation>Có thể tải về</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="79"/>
+        <source>Installed</source>
+        <translation>Đã cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="84"/>
+        <source>Updatable</source>
+        <translation>Cập nhật mới</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="89"/>
+        <source>Active</source>
+        <translation>Bật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="94"/>
+        <source>Inactive</source>
+        <translation>Tắt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="166"/>
+        <source>Description</source>
+        <translation>Mô tả</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="214"/>
+        <source>Changelog</source>
+        <translation>Các thay đổi</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="236"/>
+        <source>Screenshots</source>
+        <translation>Hình ảnh</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="428"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="574"/>
+        <source>Uninstall</source>
+        <translation>Gỡ bỏ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="459"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="564"/>
+        <source>Enable</source>
+        <translation>Bật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="490"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="559"/>
+        <source>Disable</source>
+        <translation>Tắt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="397"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="579"/>
+        <source>Update</source>
+        <translation>Cập nhật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="521"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="569"/>
+        <source>Install</source>
+        <translation>Cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="335"/>
+        <source> %p% (%v KB out of %m KB)</source>
+        <translation> %p% (%v KB trong số %m KB)</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="108"/>
+        <source>Reload repositories</source>
+        <translation>Tải lại</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.ui" line="348"/>
+        <source>Abort</source>
+        <translation>Hủy</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="355"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="361"/>
+        <source>Installed version</source>
+        <translation>Phiên bản cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="356"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="363"/>
+        <source>Latest version</source>
+        <translation>Phiên bản mới nhất</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="367"/>
+        <source>Size</source>
+        <translation>Kích thước</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="370"/>
+        <source>Download size</source>
+        <translation>Kích thước tải về</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="372"/>
+        <source>Authors</source>
+        <translation>Tác giả</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="375"/>
+        <source>License</source>
+        <translation>Giấy phép</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="378"/>
+        <source>Contact</source>
+        <translation>Liên hệ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="393"/>
+        <source>Compatibility</source>
+        <translation>Tương thích</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="395"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="403"/>
+        <source>Required VCMI version</source>
+        <translation>Cần phiên bản VCMI</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="401"/>
+        <source>Supported VCMI version</source>
+        <translation>Hỗ trợ phiên bản VCMI</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="401"/>
+        <source>please upgrade mod</source>
+        <translation>hãy cập nhật mod</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="217"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1038"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1043"/>
+        <source>mods repository index</source>
+        <translation>nơi lưu trữ mods</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="381"/>
+        <source>Git-Repository</source>
+        <translation type="unfinished">Kho Git</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="384"/>
+        <source>GitHub-Stars</source>
+        <translation type="unfinished">Sao GitHub</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="403"/>
+        <source>or newer</source>
+        <translation>hoặc mới hơn</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="406"/>
+        <source>Supported VCMI versions</source>
+        <translation>Phiên bản VCMI hỗ trợ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="422"/>
+        <source>Languages</source>
+        <translation>Ngôn ngữ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="434"/>
+        <source>Required mods</source>
+        <translation>Cần các mods sau</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="435"/>
+        <source>Conflicting mods</source>
+        <translation>Mod không tương thích</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="437"/>
+        <source>This mod cannot be enabled because it translates into a different language.</source>
+        <translation>Không thể bật mod này vì nó được dịch sang ngôn ngữ khác.</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="438"/>
+        <source>This mod can not be enabled because the following dependencies are not present</source>
+        <translation>Không thể bật mod này vì không có các bản phụ sau</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="439"/>
+        <source>This mod can not be installed because the following dependencies are not present</source>
+        <translation>Không thể cài đặt mod này vì không có các bản phụ sau</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="440"/>
+        <source>This is a submod and it cannot be installed or uninstalled separately from its parent mod</source>
+        <translation>Đây là bản phụ, không thể cài đặt hoặc gỡ bỏ tách biệt với bản chính</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="459"/>
+        <source>Notes</source>
+        <translation>Ghi chú</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="541"/>
+        <source>Context menu</source>
+        <translation type="unfinished">Menu ngữ cảnh</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="584"/>
+        <source>Open directory</source>
+        <translation type="unfinished">Mở thư mục</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="589"/>
+        <source>Open repository</source>
+        <translation type="unfinished">Mở kho lưu trữ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="877"/>
+        <source>Downloading %1. %p% (%v MB out of %m MB) finished</source>
+        <translation>Tải về %1. %p% (%v MB trong số %m MB) đã tải</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="906"/>
+        <source>Extracting content.zip (%1/%2) for %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="913"/>
+        <source>Download failed</source>
+        <translation>Không thể tải về</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="914"/>
+        <source>Unable to download all files.
+
+Encountered errors:
+
+</source>
+        <translation>Không thể tải xuống tất cả các tập tin.
+
+Có lỗi sau:
+
+</translation>
+    </message>
+    <message>
+        <source>
+
+Install successfully downloaded?</source>
+        <translation type="obsolete">
+Cài đặt đã tải xuống thành công?</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1013"/>
+        <source>Failed to install file %1.
+Reason: %2.
+Please report this issue to developers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1107"/>
+        <source>Installing Heroes Chronicles</source>
+        <translation>Cài đặt Heroes Chronicles</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1139"/>
+        <source>Extracting error!</source>
+        <translation type="unfinished">Có lỗi khi giải nén</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1141"/>
+        <source>Invalid file selected</source>
+        <translation type="unfinished">Tập tin được chọn không hợp lệ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1141"/>
+        <source>You have to select a Heroes Chronicles installer file!</source>
+        <translation type="unfinished">Bạn phải chọn tệp tin cài đặt Heroes Chronicles!</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1202"/>
+        <source>Installing mod %1</source>
+        <translation>Cài mod %1</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1290"/>
+        <source>Map exists</source>
+        <translation type="unfinished">Bản đồ đã tồn tại</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1291"/>
+        <source>Map &apos;%1&apos; already exists. Do you want to overwrite it?</source>
+        <translation type="unfinished">Bản đồ &apos;%1&apos; đã tồn tại. Bạn có muốn ghi đè không?</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1300"/>
+        <source>Yes to All</source>
+        <translation type="unfinished">Có cho tất cả</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1301"/>
+        <source>No to All</source>
+        <translation type="unfinished">Không cho tất cả</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1390"/>
+        <source>Import complete</source>
+        <translation type="unfinished">Nhập xong</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1390"/>
+        <source>%n map(s) successfully imported.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1526"/>
+        <source>Uninstall mod</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1526"/>
+        <source>Are you sure you want to uninstall %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1013"/>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1393"/>
+        <source>Import failed</source>
+        <translation type="unfinished">Nhập thất bại</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="915"/>
+        <source>
+
+Process successfully downloaded files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1393"/>
+        <source>Failed to import the following maps:
+%1</source>
+        <translation type="unfinished">Không thể nhập các bản đồ sau:
+%1</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1423"/>
+        <source>Operation failed</source>
+        <translation>Không mở được</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1424"/>
+        <source>Encountered errors:
+</source>
+        <translation>Đã có lỗi:
+</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1476"/>
+        <source>screenshots</source>
+        <translation>hình ảnh</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="1482"/>
+        <source>Screenshot %1</source>
+        <translation>Hình ảnh %1</translation>
+    </message>
+    <message>
+        <location filename="../modManager/cmodlistview_moc.cpp" line="338"/>
+        <source>Mod is incompatible</source>
+        <translation>Mod này không tương thích</translation>
+    </message>
+</context>
+<context>
+    <name>CSettingsView</name>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="166"/>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="115"/>
+        <source>Off</source>
+        <translation>Tắt</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="420"/>
+        <source>Artificial Intelligence</source>
+        <translation>Trí tuệ nhân tạo</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="552"/>
+        <source>Interface Scaling</source>
+        <translation>Phóng đại giao diện</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1328"/>
+        <source>Neutral AI in battles</source>
+        <translation>Máy trung lập trong trận chiến</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="904"/>
+        <source>Enemy AI in battles</source>
+        <translation>Máy của đối thủ trong trận chiến</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="941"/>
+        <source>Additional repository</source>
+        <translation>Nguồn bổ sung</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="476"/>
+        <source>Adventure Map Allies</source>
+        <translation>Máy liên minh ở bản đồ phiêu lưu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="252"/>
+        <source>Online Lobby port</source>
+        <translation>Cổng kết nối trực tuyến</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1193"/>
+        <source>Autocombat AI in battles</source>
+        <translation>Máy tự động đánh trong trận chiến</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="348"/>
+        <source>Sticks Sensitivity</source>
+        <translation type="unfinished">Độ nhạy cần điều khiển</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1240"/>
+        <source>Automatic (Linear)</source>
+        <translation type="unfinished">Tự động (Tuyến tính)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="733"/>
+        <source>Haptic Feedback</source>
+        <translation type="unfinished">Phản hồi xúc giác</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="875"/>
+        <source>Software Cursor</source>
+        <translation>Con trỏ chuột</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="498"/>
+        <location filename="../settingsView/csettingsview_moc.ui" line="654"/>
+        <location filename="../settingsView/csettingsview_moc.ui" line="888"/>
+        <source>Automatic</source>
+        <translation>Tự động</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="334"/>
+        <source>Mods Validation</source>
+        <translation>Xác thực mods</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1378"/>
+        <source>Config editor</source>
+        <translation type="unfinished">Trình chỉnh sửa cấu hình</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="466"/>
+        <source>Open editor</source>
+        <translation type="unfinished">Mở trình chỉnh sửa</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="503"/>
+        <source>None</source>
+        <translation>Không có</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="508"/>
+        <source>xBRZ x2</source>
+        <translation type="unfinished">xBRZ x2</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="513"/>
+        <source>xBRZ x3</source>
+        <translation type="unfinished">xBRZ x3</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="518"/>
+        <source>xBRZ x4</source>
+        <translation type="unfinished">xBRZ x4</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="68"/>
+        <source>Full</source>
+        <translation>Đầy đủ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="911"/>
+        <source>Allow portrait mode</source>
+        <translation type="unfinished">Cho phép chế độ dọc</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1032"/>
+        <source>Use scalable fonts</source>
+        <translation>Điều chỉnh kích thước phông chữ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1335"/>
+        <source>Online Lobby address</source>
+        <translation>Địa chỉ sảnh trực tuyến</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="678"/>
+        <source>Handle back as right mouse button</source>
+        <translation type="unfinished">Xử lý nút quay lại như chuột phải</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="259"/>
+        <source>Cursor Scaling</source>
+        <translation>Kích cỡ con trỏ chuột</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="954"/>
+        <source>Scalable</source>
+        <translation>Kiểu mới</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="583"/>
+        <source>Miscellaneous</source>
+        <translation>Tùy chọn khác</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1436"/>
+        <source>Select a display mode for the game
+
+Windowed - the game will run inside a window that covers part of your screen.
+
+Borderless Windowed Mode - the game will run in a full-screen window, matching your screen&apos;s resolution.
+
+Fullscreen Exclusive Mode - the game will cover the entirety of your screen and will use selected resolution.</source>
+        <translation>Chọn chế độ hiển thị cho trò chơi
+
+Chế độ cửa sổ - Trò chơi sẽ chạy ở kích thước màn hình mà bạn đã chọn.
+
+Toàn màn hình không viền - Phù hợp với độ phân giải màn hình của bạn.
+
+Toàn màn hình riêng biệt - Sử dụng kích thước màn hình do bạn chọn.</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="327"/>
+        <source>Font Scaling (experimental)</source>
+        <translation>Tỷ lệ phông chữ (thử nghiệm)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1013"/>
+        <source>Original</source>
+        <translation>Kiểu cũ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="723"/>
+        <source>Upscaling Filter</source>
+        <translation>Bộ lọc nâng cao</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="141"/>
+        <source>Basic</source>
+        <translation>Cơ bản</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="385"/>
+        <source>Ignore mute switch</source>
+        <translation type="unfinished">Bỏ qua công tắc tắt tiếng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="437"/>
+        <source>Full mod extraction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="593"/>
+        <source>Show Status in Discord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="685"/>
+        <source>Use Relative Pointer Mode</source>
+        <translation type="unfinished">Sử dụng chế độ con trỏ tương đối</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1230"/>
+        <source>Nearest</source>
+        <translation type="unfinished">Gần nhất</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1235"/>
+        <source>Linear</source>
+        <translation type="unfinished">Tuyến tính</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1275"/>
+        <source>Input - Touchscreen</source>
+        <translation>Ngõ vào - Cảm ứng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1543"/>
+        <source>Save Before Visit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="822"/>
+        <source>Adventure Map Enemies</source>
+        <translation>Máy đối thủ ở bản đồ phiêu lưu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="362"/>
+        <source>Show Tutorial again</source>
+        <translation>Hiển thị lại hướng dẫn</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="355"/>
+        <source>Reset</source>
+        <translation>Đặt lại</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="187"/>
+        <source>Network</source>
+        <translation>Mạng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="982"/>
+        <source>Audio</source>
+        <translation>Âm thanh</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1429"/>
+        <source>Relative Pointer Speed</source>
+        <translation>Tốc độ con trỏ chuột cân đối</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="934"/>
+        <source>Music Volume</source>
+        <translation>Âm lượng nhạc nền</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1308"/>
+        <source>Ignore SSL errors</source>
+        <translation>Bỏ qua lỗi SSL</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1260"/>
+        <source>Input - Mouse</source>
+        <translation>Ngõ vào - Chuột</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="313"/>
+        <source>Long Touch Duration</source>
+        <translation type="unfinished">Thời gian nhấn giữ lâu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1371"/>
+        <source>Controller Click Tolerance</source>
+        <translation type="unfinished">Độ nhạy nhấp chuột của bộ điều khiển</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="664"/>
+        <source>Touch Tap Tolerance</source>
+        <translation type="unfinished">Độ nhạy chạm màn hình</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1205"/>
+        <source>Input - Controller</source>
+        <translation>Ngõ vào - Điều khiển</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1301"/>
+        <source>Sound Volume</source>
+        <translation>Âm lượng hiệu ứng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1449"/>
+        <source>Windowed</source>
+        <translation>Chế độ cửa sổ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1454"/>
+        <source>Borderless fullscreen</source>
+        <translation>Toàn màn hình không viền</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1459"/>
+        <source>Exclusive fullscreen</source>
+        <translation>Toàn màn hình riêng biệt</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1215"/>
+        <source>Autosave limit (0 = off)</source>
+        <translation>Giới hạn bản lưu tự động (0 = không giới hạn)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="671"/>
+        <source>Downscaling Filter</source>
+        <translation>Giảm bộ lọc</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="320"/>
+        <source>Framerate Limit</source>
+        <translation>Giới hạn khung hình</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="747"/>
+        <source>Autosave prefix</source>
+        <translation>Thêm tên vào bản lưu tự động</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="740"/>
+        <source>Mouse Click Tolerance</source>
+        <translation type="unfinished">Độ nhạy nhấp chuột</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1129"/>
+        <source>Sticks Acceleration</source>
+        <translation type="unfinished">Gia tốc cần điều khiển</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="782"/>
+        <source>empty = map name prefix</source>
+        <translation>chưa có tên bản đồ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="490"/>
+        <source>Refresh now</source>
+        <translation>Làm mới</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="483"/>
+        <source>Default repository</source>
+        <translation>Nguồn mặc định</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1222"/>
+        <source>Renderer</source>
+        <translation>Nguồn xuất đồ họa</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="113"/>
+        <source>On</source>
+        <translation>Bật</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1248"/>
+        <source>Reserved screen area</source>
+        <translation>Khu màn hình dành riêng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="392"/>
+        <source>Heroes III Translation</source>
+        <translation>Bản dịch Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="197"/>
+        <source>Check on startup</source>
+        <translation>Kiểm tra khi khởi động</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="1186"/>
+        <source>Fullscreen</source>
+        <translation>Toàn màn hình</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="296"/>
+        <source>General</source>
+        <translation>Chung</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="226"/>
+        <source>VCMI Language</source>
+        <translation>Ngôn ngữ VCMI</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="845"/>
+        <source>Resolution</source>
+        <translation>Độ phân giải</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="430"/>
+        <source>Autosave</source>
+        <translation>Tự động lưu bản đồ</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="112"/>
+        <source>VSync</source>
+        <translation type="unfinished">VSync</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="852"/>
+        <source>Display index</source>
+        <translation>Mục hiển thị</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="306"/>
+        <source>Network port</source>
+        <translation>Cổng mạng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="997"/>
+        <source>Video</source>
+        <translation>Phim ảnh</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.ui" line="970"/>
+        <source>Show intro</source>
+        <translation>Hiện giới thiệu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="124"/>
+        <source>StupidAI (deprecated)</source>
+        <translation type="unfinished">StupidAI (đã lỗi thời)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="128"/>
+        <source>BattleAI (default, recommended)</source>
+        <translation type="unfinished">BattleAI (mặc định, khuyến nghị)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="132"/>
+        <source>MMAI (experimental)</source>
+        <translation type="unfinished">MMAI (thử nghiệm)</translation>
+    </message>
+    <message>
+        <source>Nullkiller (superseded by Nullkiller2)</source>
+        <translation type="obsolete">Nullkiller (đã được thay thế bởi Nullkiller2)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="145"/>
+        <source>Nullkiller2 (default, recommended)</source>
+        <translation type="unfinished">Nullkiller2 (mặc định, khuyến nghị)</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="155"/>
+        <source>EmptyAI - No valid AI libraries found!</source>
+        <translation type="unfinished">EmptyAI - Không tìm thấy thư viện AI hợp lệ!</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="676"/>
+        <source>Active</source>
+        <translation>Bật</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="681"/>
+        <source>Disabled</source>
+        <translation>Tắt</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="682"/>
+        <source>Enable</source>
+        <translation>Bật</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="687"/>
+        <source>Not Installed</source>
+        <translation>Chưa cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/csettingsview_moc.cpp" line="688"/>
+        <source>Install</source>
+        <translation>Cài đặt</translation>
+    </message>
+</context>
+<context>
+    <name>ChroniclesExtractor</name>
+    <message>
+        <location filename="../modManager/chroniclesextractor.cpp" line="100"/>
+        <location filename="../modManager/chroniclesextractor.cpp" line="101"/>
+        <source>Heroes Chronicles</source>
+        <translation type="unfinished">Heroes Chronicles</translation>
+    </message>
+    <message>
+        <location filename="../modManager/chroniclesextractor.cpp" line="149"/>
+        <source>Heroes Chronicles %1 - %2</source>
+        <translation type="unfinished">Heroes Chronicles %1 - %2</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigEditorDialog</name>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.ui" line="50"/>
+        <source>Save</source>
+        <translation type="unfinished">Lưu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.ui" line="73"/>
+        <source>File:</source>
+        <translation type="unfinished">Tệp:</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.ui" line="86"/>
+        <source>Close</source>
+        <translation>Đóng</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.cpp" line="27"/>
+        <source>Config editor</source>
+        <translation type="unfinished">Trình chỉnh sửa cấu hình</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.cpp" line="69"/>
+        <source>Unsaved changes</source>
+        <translation type="unfinished">Thay đổi chưa lưu</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.cpp" line="69"/>
+        <source>Do you want to discard changes?</source>
+        <translation type="unfinished">Bạn có muốn hủy các thay đổi không?</translation>
+    </message>
+    <message>
+        <location filename="../settingsView/configeditordialog_moc.cpp" line="123"/>
+        <source>JSON file is not valid!</source>
+        <translation type="unfinished">Tệp JSON không hợp lệ!</translation>
+    </message>
+</context>
+<context>
+    <name>File size</name>
+    <message>
+        <location filename="../modManager/modstate.cpp" line="159"/>
+        <location filename="../modManager/modstatemodel.cpp" line="101"/>
+        <source>%1 MiB</source>
+        <translation type="unfinished">%1 MiB</translation>
+    </message>
+</context>
+<context>
+    <name>FirstLaunchView</name>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="28"/>
+        <source>Language</source>
+        <translation>Ngôn ngữ</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="53"/>
+        <source>Heroes III Data</source>
+        <translation>Dữ liệu Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="78"/>
+        <source>Mods Preset</source>
+        <translation type="unfinished">Thiết lập mod</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="127"/>
+        <source>Select your language</source>
+        <translation>Chọn ngôn ngữ</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="173"/>
+        <source>Have a question? Found a bug? Want to help? Join us!</source>
+        <translation>Có thắc mắc? Gặp lỗi hoặc cần giúp đỡ? Liên hệ với chúng tôi!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="253"/>
+        <source>Locate Heroes III data files</source>
+        <translation>Vị trí tệp dữ liệu Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="305"/>
+        <source>Use offline installer from gog.com</source>
+        <translation>Cài đặt ngoại tuyến từ gog.com</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="318"/>
+        <source>You can manually copy Maps, Data, and Mp3 folders from the original game directory to the VCMI data directory shown below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="337"/>
+        <source>Install gog.com files</source>
+        <translation>Cài đặt tệp tin từ gog.com</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="482"/>
+        <source>No Heroes III data? Download the free demo to try VCMI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="498"/>
+        <source>Download Demo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="527"/>
+        <source>Your Heroes III data files have been successfully found.</source>
+        <translation>Dữ liệu Heroes III đã được tìm thấy.</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="665"/>
+        <source>Install a translation of Heroes III in your preferred language</source>
+        <translation>Cài ngôn ngữ Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="396"/>
+        <source>Installing... %p%</source>
+        <translation>Cài đặt... %p%</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="425"/>
+        <source>If you already have Heroes III files on your device, you can select this directory and VCMI will copy the existing data automatically.</source>
+        <translation>Nếu bạn có các tập tin Heroes III trên thiết bị của mình, bạn có thể chọn thư mục này và VCMI sẽ tự động sao chép dữ liệu từ đó.</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="469"/>
+        <source>Copy existing files</source>
+        <translation>Sao chép các tập tin đang có</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="634"/>
+        <source>Install recommended VCMI Mods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="739"/>
+        <source>Optionally, you can install additional mods either now, or at any point later, using the VCMI Launcher</source>
+        <translation>Tùy chọn, bạn có thể cài mod bổ sung ngay bây giờ hoặc bất kì lúc nào bằng VCMI Launcher</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="723"/>
+        <source>Install compatible version of &quot;Horn of the Abyss&quot;, a fan-made Heroes III expansion ported by the VCMI team</source>
+        <translation>Cài đặt phiên bản tương thích Horn of the Abyss, bản mở rộng Heroes III do các FAN hâm mộ tự làm, được nhóm VCMI chuyển qua</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="806"/>
+        <source>VCMI Extras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="836"/>
+        <source>Install compatible version of &quot;In The Wake of Gods&quot;, a fan-made Heroes III expansion</source>
+        <translation>Cài đặt phiên bản tương thích In The Wake of Gods, bản mở rộng Heroes III do các FAN hâm mộ tự làm</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="852"/>
+        <source>A feature-rich expansion that expands gameplay with one alternative unit for each of the 9 standard towns, plus new neutral creatures, creature banks, skills and spells</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="868"/>
+        <source>Descend into the underground realm and uncover Casemate — a new faction where mushrooms, stone and rune magic thrive in the dark, created for VCMI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="885"/>
+        <source>Install mod that provides various interface improvements, such as a better interface for random maps and selectable actions in battles</source>
+        <translation>Cài đặt mod cung cấp thêm nhiều cải tiến về giao diện đồ họa cho bản đồ ngẫu nhiên và có thể lựa chọn thêm các hành động trong trận chiến</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="951"/>
+        <source>Tides of War</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="989"/>
+        <source>Fallen of the Depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="1048"/>
+        <source>Finish</source>
+        <translation>Hoàn thành</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="159"/>
+        <source>VCMI on Github</source>
+        <translation>VCMI trên Github</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="166"/>
+        <source>VCMI on Discord</source>
+        <translation>VCMI trên Discord</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="182"/>
+        <source>Thank you for installing VCMI!
+
+Before you can start playing, there are a few more steps to complete.
+
+Please remember that to use VCMI, you must own the original data files for Heroes® of Might and Magic® III: Complete or The Shadow of Death.
+
+Heroes® of Might and Magic® III HD is currently not supported!</source>
+        <translation>Cảm ơn bạn đã cài đặt VCMI!
+
+Trước khi bắt đầu chơi, bạn cần phải cài đặt thêm một vài bước nữa.
+
+Để có thể chơi được VCMI bạn phải sao chép dữ liệu gốc từ bản Heroes® of Might and Magic® III: Complete hoặc The Shadow of Death.
+
+Hiện tại chưa hỗ trợ Heroes® of Might and Magic® III HD!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="216"/>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="603"/>
+        <source>Next</source>
+        <translation>Tiếp theo</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="355"/>
+        <source>Manual Installation</source>
+        <translation>Cài đặt thủ công</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="368"/>
+        <source>Search again</source>
+        <translation>Tìm kiếm lại</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="450"/>
+        <source>Heroes III data files</source>
+        <translation>Tệp dữ liệu Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="287"/>
+        <source>Copy existing data</source>
+        <translation>Sao chép dữ liệu đang có</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="543"/>
+        <source>If you own Heroes III on gog.com, you can download a backup offline installer from gog.com. VCMI will then import Heroes III data using the offline installer. 
+Offline installer consists of two files: &quot;.exe&quot; and &quot;.bin&quot; - you must download both.</source>
+        <translation>Nếu bạn đã có bộ cài đặt Heroes III tải trên trang gog.com, bạn có thể chọn cài đặt tệp tin từ gog.com ngoại tuyến. Khi đó, VCMI sẽ sao chép các tệp tin dữ liệu của Heroes III.
+Cài đặt ngoại tuyến bao gồm hai tệp tin sau: &quot;.exe&quot; và &quot;.bin&quot;</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="596"/>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="1041"/>
+        <source>Back</source>
+        <translation>Quay lại</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="767"/>
+        <source>Horn of the Abyss</source>
+        <translation>Horn of the Abyss</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="693"/>
+        <source>Heroes III Translation</source>
+        <translation>Bản dịch Heroes III</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.ui" line="913"/>
+        <source>In The Wake of Gods</source>
+        <translation>In The Wake of Gods</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="215"/>
+        <source>Heroes III installation found!</source>
+        <translation>Đã tìm thấy bản cài đặt Heroes III!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="215"/>
+        <source>Copy data to VCMI folder?</source>
+        <translation>Sao chép dữ liệu vào thư mục VCMI?</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="451"/>
+        <source>GOG file (*.*)</source>
+        <translation>Tệp tin GOG (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="452"/>
+        <source>File selection</source>
+        <translation>Chọn tệp tin</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="463"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="663"/>
+        <source>GOG installer</source>
+        <translation>Trình cài đặt GOG</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="556"/>
+        <source>Heroes III: HD Edition files are not supported by VCMI.
+Please select the directory with Heroes III: Complete Edition or Heroes III: Shadow of Death.</source>
+        <translation>VCMI không hỗ trợ các tập tin Heroes III: HD Edition.
+Hãy chọn thư mục có Heroes III: Complete Edition hoặc Heroes III: Shadow of Death.</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="558"/>
+        <source>Unknown or unsupported Heroes III version found.
+Please select the directory with Heroes III: Complete Edition or Heroes III: Shadow of Death.</source>
+        <translation>Phiên bản Heroes III không đúng hoặc không được hỗ trợ.
+Hãy chọn thư mục có Heroes III: Complete Edition hoặc Heroes III: Shadow of Death.</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="479"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="676"/>
+        <source>GOG data</source>
+        <translation>Dữ liệu GOG</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="149"/>
+        <source>Downloading Heroes III Demo...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="395"/>
+        <source>Failed to open file: %1</source>
+        <translation type="unfinished">Không mở được tệp: %1</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="415"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="441"/>
+        <source>You need to select a %1 file!</source>
+        <comment>param is file extension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="423"/>
+        <source>Unknown installer selected.
+You need to select the offline GOG installer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="435"/>
+        <source>You selected a GOG Galaxy installer. This file does not contain the game. Please download the offline backup game installer instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="464"/>
+        <source>Select the offline GOG installer (.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="473"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="666"/>
+        <source>Invalid file selected</source>
+        <translation type="unfinished">Tập tin được chọn không hợp lệ</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="480"/>
+        <source>Select the offline GOG installer data file: %1</source>
+        <comment>param is file name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="500"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="679"/>
+        <source>Invalid data file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="595"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="731"/>
+        <source>Importing Heroes III data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="628"/>
+        <source>Preparing installer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="688"/>
+        <source>Extracting installer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="715"/>
+        <source>Extracting error!</source>
+        <translation>Có lỗi khi giải nén</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="719"/>
+        <source>Hash error!</source>
+        <translation>Lỗi hàm Hash!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="723"/>
+        <source>No Heroes III data!</source>
+        <translation>Không có dữ liệu Heroes III!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="723"/>
+        <source>Selected files do not contain Heroes III data!</source>
+        <translation>Các tệp tin đã chọn không chứa dữ liệu Heroes III!</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="745"/>
+        <source>Scanning selected folder...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="520"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="553"/>
+        <source>Failed to detect valid Heroes III data in chosen directory.
+Please select the directory with installed Heroes III data.</source>
+        <translation>Không tìm thấy dữ liệu Heroes III trong thư mục đã chọn.
+Hãy chọn đúng thư mục chứa dữ liệu Heroes III đã cài đặt.</translation>
+    </message>
+    <message>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="520"/>
+        <location filename="../firstLaunch/firstlaunch_moc.cpp" line="564"/>
+        <source>Heroes III data not found!</source>
+        <translation>Không tìm thấy dữ liệu Heroes III!</translation>
+    </message>
+</context>
+<context>
+    <name>HdExtractor</name>
+    <message>
+        <location filename="../modManager/hdextractor.cpp" line="38"/>
+        <source>Select Directory with HD Edition (Steam folder)</source>
+        <translation type="unfinished">Chọn thư mục chứa HD Edition (thư mục Steam)</translation>
+    </message>
+    <message>
+        <location filename="../modManager/hdextractor.cpp" line="46"/>
+        <source>Invalid folder</source>
+        <translation type="unfinished">Thư mục không hợp lệ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/hdextractor.cpp" line="46"/>
+        <source>The selected folder does not contain HOMM3 2.0.exe! Please select the HD Edition installation folder.</source>
+        <translation type="unfinished">Thư mục đã chọn không chứa HOMM3 2.0.exe! Vui lòng chọn thư mục cài đặt HD Edition.</translation>
+    </message>
+    <message>
+        <location filename="../modManager/hdextractor.cpp" line="98"/>
+        <source>Extraction error</source>
+        <translation type="unfinished">Lỗi giải nén</translation>
+    </message>
+    <message>
+        <location filename="../modManager/hdextractor.cpp" line="98"/>
+        <source>Please delete mod and try again! Failed to copy file %1 to %2</source>
+        <translation type="unfinished">Vui lòng xóa mod và thử lại! Không thể sao chép tệp %1 tới %2</translation>
+    </message>
+</context>
+<context>
+    <name>ImageViewer</name>
+    <message>
+        <location filename="../modManager/imageviewer_moc.ui" line="20"/>
+        <source>Image Viewer</source>
+        <translation>Trình xem ảnh</translation>
+    </message>
+</context>
+<context>
+    <name>Innoextract</name>
+    <message>
+        <location filename="../innoextract.cpp" line="42"/>
+        <source>Stream error while extracting files!
+error reason: </source>
+        <translation>Đã có lỗi khi giải nén tập tin!
+Có thể do lỗi: </translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="55"/>
+        <source>Not a supported Inno Setup installer!</source>
+        <translation>Không hỗ trợ các tệp tin cài đặt đóng gói bằng Inno Setup!</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="58"/>
+        <source>VCMI was compiled without innoextract support, which is needed to extract exe files!</source>
+        <translation>VCMI không hỗ trợ tính năng để giải nén các tệp tin exe!</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../innoextract.cpp" line="143"/>
+        <source>SHA1 hash of provided files:
+Exe (%n bytes):
+%1</source>
+        <comment>param is hash</comment>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../innoextract.cpp" line="145"/>
+        <source>
+Bin (%n bytes):
+%1</source>
+        <comment>param is hash</comment>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="148"/>
+        <source>Internal copy process failed. Enough space on device?
+
+%1</source>
+        <translation>Không thể sao chép dữ liệu. Xem có đủ dung lượng trống trên thiết bị không?
+
+%1</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="157"/>
+        <source>Exe</source>
+        <translation type="unfinished">Exe</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="157"/>
+        <source>Bin</source>
+        <translation type="unfinished">Bin</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="166"/>
+        <source>Language mismatch!
+%1
+
+%2</source>
+        <translation>Ngôn ngữ không phù hợp!
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="168"/>
+        <source>Only one file known! Maybe files are corrupted? Please download again.
+%1
+
+%2</source>
+        <translation>Chỉ có một tập tin! Có thể các tập tin đã bị lỗi? Hãy tải lại.
+%1
+
+%2</translation>
+    </message>
+    <message>
+        <location filename="../innoextract.cpp" line="174"/>
+        <source>Unknown files! Maybe files are corrupted? Please download again.
+
+%1</source>
+        <translation>Tập tin không xác định! Có thể tập tin đã bị lỗi? Hãy tải lại.
+
+%1</translation>
+    </message>
+</context>
+<context>
+    <name>Language</name>
+    <message>
+        <location filename="../languages.cpp" line="23"/>
+        <source>Belarusian</source>
+        <translation type="unfinished">Tiếng Belarus</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="24"/>
+        <source>Bulgarian</source>
+        <translation type="unfinished">Tiếng Bulgaria</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="25"/>
+        <source>Czech</source>
+        <translation>Tiếng Séc</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="26"/>
+        <source>Simplified Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="27"/>
+        <source>Traditional Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="28"/>
+        <source>Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="29"/>
+        <source>English</source>
+        <translation>Tiếng Anh</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="30"/>
+        <source>Filipino</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="31"/>
+        <source>Finnish</source>
+        <translation>Tiếng Phần Lan</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="32"/>
+        <source>French</source>
+        <translation>Tiếng Pháp</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="33"/>
+        <source>German</source>
+        <translation>Tiếng Đức</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="34"/>
+        <source>Greek</source>
+        <translation type="unfinished">Tiếng Hy Lạp</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="35"/>
+        <source>Hungarian</source>
+        <translation>Tiếng Hungary</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="36"/>
+        <source>Italian</source>
+        <translation>Tiếng Ý</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="37"/>
+        <source>Japanese</source>
+        <translation type="unfinished">Tiếng Nhật</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="38"/>
+        <source>Korean</source>
+        <translation>Tiếng Hàn</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="39"/>
+        <source>Latvian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="40"/>
+        <source>Norwegian</source>
+        <translation type="unfinished">Tiếng Na Uy</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="41"/>
+        <source>Polish</source>
+        <translation>Tiếng Ba Lan</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="42"/>
+        <source>Portuguese</source>
+        <translation>Tiếng Bồ Đào Nha</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="43"/>
+        <source>Romanian</source>
+        <translation type="unfinished">Tiếng Romania</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="44"/>
+        <source>Russian</source>
+        <translation>Tiếng Nga</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="45"/>
+        <source>Serbian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="46"/>
+        <source>Spanish</source>
+        <translation>Tiếng Tây Ban Nha</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="47"/>
+        <source>Swedish</source>
+        <translation>Tiếng Thụy Điển</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="48"/>
+        <source>Turkish</source>
+        <translation>Tiếng Thổ Nhĩ Kỳ</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="49"/>
+        <source>Ukrainian</source>
+        <translation>Tiếng Ukraina</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="50"/>
+        <source>Vietnamese</source>
+        <translation>Tiếng Việt</translation>
+    </message>
+    <message>
+        <location filename="../languages.cpp" line="72"/>
+        <source>Auto (%1)</source>
+        <translation>Tự động (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../mainwindow_moc.ui" line="20"/>
+        <source>VCMI Launcher</source>
+        <translation>VCMI Launcher</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.ui" line="153"/>
+        <source>Settings</source>
+        <translation>Cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.ui" line="199"/>
+        <source>Help</source>
+        <translation>Trợ giúp</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.ui" line="61"/>
+        <source>Game</source>
+        <translation type="unfinished">Trò chơi</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.ui" line="107"/>
+        <source>Mods</source>
+        <translation>Mods</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.cpp" line="52"/>
+        <source>Error starting executable</source>
+        <translation>Có lỗi khi chạy tệp tin exe</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.cpp" line="290"/>
+        <source>Replace config file?</source>
+        <translation>Thay thế tệp tin cấu hình?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow_moc.cpp" line="290"/>
+        <source>Do you want to replace %1?</source>
+        <translation>Bạn có muốn thay thế %1?</translation>
+    </message>
+</context>
+<context>
+    <name>ModFields</name>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="196"/>
+        <source>Name</source>
+        <translation>Tên</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="199"/>
+        <source>Type</source>
+        <translation>Loại</translation>
+    </message>
+</context>
+<context>
+    <name>ModStateController</name>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="214"/>
+        <source>Can not install submod</source>
+        <translation>Không thể cài đặt mod phụ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="217"/>
+        <source>Mod is already installed</source>
+        <translation>Mod đã được cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="226"/>
+        <source>Can not uninstall submod</source>
+        <translation>Không thể gỡ cài đặt mod phụ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="229"/>
+        <source>Mod is not installed</source>
+        <translation>Mod chưa được cài đặt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="242"/>
+        <source>Mod is already enabled</source>
+        <translation>Mod đã được bật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="245"/>
+        <location filename="../modManager/modstatecontroller.cpp" line="271"/>
+        <source>Mod must be installed first</source>
+        <translation>Bạn phải cài đặt mod trước</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="249"/>
+        <source>Mod is not compatible, please update VCMI and check the latest mod revisions</source>
+        <translation>Mod không tương thích, hãy cập nhật VCMI và kiểm tra các mod mới nhất</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="252"/>
+        <source>Can not enable translation mod for a different language!</source>
+        <translation>Không thể bật bản dịch cho ngôn ngữ khác!</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="257"/>
+        <source>Required mod %1 is missing</source>
+        <translation>Yêu cầu mod bị thiếu %1</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="268"/>
+        <source>Mod is already disabled</source>
+        <translation>Mod đã bị tắt</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="281"/>
+        <source>Mod archive is missing</source>
+        <translation>Mod bị thiếu</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="286"/>
+        <source>Mod archive is invalid or corrupted</source>
+        <translation>Mod không hợp lệ hoặc bị hỏng</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="312"/>
+        <location filename="../modManager/modstatecontroller.cpp" line="332"/>
+        <source>Failed to extract mod data</source>
+        <translation>Không trích xuất được dữ liệu mod</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="344"/>
+        <source>Mod data was not found</source>
+        <translation>Không tìm thấy dữ liệu mod</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstatecontroller.cpp" line="348"/>
+        <source>Mod is located in a protected directory, please remove it manually:
+</source>
+        <translation>Mod nằm trong thư mục được bảo vệ, hãy xóa thủ công:
+</translation>
+    </message>
+</context>
+<context>
+    <name>ModStateItemModel</name>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="37"/>
+        <source>Translation</source>
+        <translation>Bản dịch</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="38"/>
+        <source>Town</source>
+        <translation>Thành</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="39"/>
+        <source>Test</source>
+        <translation>Thử nghiệm</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="40"/>
+        <source>Templates</source>
+        <translation>Mẫu</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="41"/>
+        <source>Spells</source>
+        <translation>Phép thuật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="42"/>
+        <source>Music</source>
+        <translation>Âm nhạc</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="43"/>
+        <source>Maps</source>
+        <translation>Bản đồ</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="44"/>
+        <source>Sounds</source>
+        <translation>Âm thanh</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="45"/>
+        <source>Skills</source>
+        <translation>Kỹ năng</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="46"/>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="64"/>
+        <source>Other</source>
+        <translation>Khác</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="47"/>
+        <source>Objects</source>
+        <translation>Đối tượng</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="48"/>
+        <source>Mechanics</source>
+        <translation>Cơ học</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="49"/>
+        <source>Interface</source>
+        <translation>Giao diện</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="50"/>
+        <source>Heroes</source>
+        <translation>Tướng</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="51"/>
+        <source>Graphical</source>
+        <translation>Đồ họa</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="52"/>
+        <source>Expansion</source>
+        <translation>Bản mở rộng</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="53"/>
+        <source>Creatures</source>
+        <translation>Quái</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="54"/>
+        <source>Compatibility</source>
+        <translation>Tương thích</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="55"/>
+        <source>Campaigns</source>
+        <translation>Chiến dịch</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="56"/>
+        <source>Artifacts</source>
+        <translation>Báu vật</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="57"/>
+        <source>AI</source>
+        <translation type="unfinished">AI</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="58"/>
+        <source>Resources</source>
+        <translation type="unfinished">Tài nguyên</translation>
+    </message>
+    <message>
+        <location filename="../modManager/modstateitemmodel_moc.cpp" line="59"/>
+        <source>Demo</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../main.cpp" line="154"/>
+        <source>Error starting executable</source>
+        <translation>Có lỗi khi khởi động</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="155"/>
+        <source>Failed to start %1
+Reason: %2</source>
+        <translation>Không thể khởi động %1
+Có thể do lỗi: %2</translation>
+    </message>
+</context>
+<context>
+    <name>StartGameTab</name>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="655"/>
+        <source>Import from Clipboard</source>
+        <translation type="unfinished">Nhập từ bảng tạm</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="674"/>
+        <source>Rename Current Preset</source>
+        <translation type="unfinished">Đổi tên thiết lập hiện tại</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="588"/>
+        <source>Create New Preset</source>
+        <translation type="unfinished">Tạo thiết lập mới</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="569"/>
+        <source>Export to Clipboard</source>
+        <translation type="unfinished">Xuất ra bảng tạm</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="623"/>
+        <source>Delete Current Preset</source>
+        <translation type="unfinished">Xóa thiết lập hiện tại</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="119"/>
+        <source>Unsupported or corrupted game data detected!</source>
+        <translation>Đã tìm thấy dữ liệu trò chơi không được hỗ trợ hoặc bị hỏng!</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="141"/>
+        <location filename="../startGame/StartGameTab.ui" line="160"/>
+        <location filename="../startGame/StartGameTab.ui" line="201"/>
+        <location filename="../startGame/StartGameTab.ui" line="220"/>
+        <location filename="../startGame/StartGameTab.ui" line="299"/>
+        <location filename="../startGame/StartGameTab.ui" line="411"/>
+        <location filename="../startGame/StartGameTab.ui" line="430"/>
+        <location filename="../startGame/StartGameTab.ui" line="471"/>
+        <location filename="../startGame/StartGameTab.ui" line="509"/>
+        <location filename="../startGame/StartGameTab.ui" line="528"/>
+        <source>?</source>
+        <translation type="unfinished">?</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="239"/>
+        <source>Install Translation</source>
+        <translation>Cài đặt bản dịch</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="449"/>
+        <source>No soundtrack detected!</source>
+        <translation>Không tìm thấy âm thanh!</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="258"/>
+        <source>Armaggedon&apos;s Blade campaigns are missing!</source>
+        <translation>Chưa có chiến dịch Armageddon&apos;s Blade hoặc đã bị lỗi!</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="351"/>
+        <source>No video files detected!</source>
+        <translation>Không tìm thấy video!</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="490"/>
+        <source>Activate Translation</source>
+        <translation>Bật bản dịch</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="373"/>
+        <source>Import files</source>
+        <translation>Nhập tập tin</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="759"/>
+        <source>Check For Updates</source>
+        <translation>Kiểm tra bản cập nhật</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="778"/>
+        <source>Go to Downloads Page</source>
+        <translation>Mở trang tải xuống</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="797"/>
+        <source>Go to Changelog Page</source>
+        <translation>Mở trang nhật ký thay đổi</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="715"/>
+        <source>You are using the latest version</source>
+        <translation>Bạn đang sử dụng phiên bản mới nhất</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="37"/>
+        <source>Game Data Files</source>
+        <translation>Dữ Liệu Trò Chơi</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="55"/>
+        <source>Mod Preset</source>
+        <translation type="unfinished">Thiết lập mod</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="280"/>
+        <source>Install HD Edition (Steam)</source>
+        <translation type="unfinished">Cài đặt HD Edition (Steam)</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="318"/>
+        <source>Install game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="831"/>
+        <source>Resume</source>
+        <translation type="unfinished">Tiếp tục</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="892"/>
+        <source>Play</source>
+        <translation>Chơi</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.ui" line="859"/>
+        <source>Editor</source>
+        <translation>Biên tập</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../startGame/StartGameTab.cpp" line="205"/>
+        <source>Update %n mods</source>
+        <translation>
+            <numerusform>Cập nhật %n mods</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../startGame/StartGameTab.cpp" line="209"/>
+        <source>Heroes Chronicles:
+%n/%1 installed</source>
+        <translation>
+            <numerusform>Heroes Chronicles:
+cài đặt %n/%1</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="234"/>
+        <source>Update to %1 available</source>
+        <translation>Cập nhật %1</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="268"/>
+        <source>Install Heroes III</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="269"/>
+        <source>This will remove all demo game data (Data, Maps, Mp3, Video folders) and restart the setup wizard. Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="293"/>
+        <source>All supported files</source>
+        <translation>Các tệp tin được hỗ trợ</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="294"/>
+        <source>Maps</source>
+        <translation type="unfinished">Bản đồ</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="295"/>
+        <source>Campaigns</source>
+        <translation type="unfinished">Chiến dịch</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="296"/>
+        <source>Configs</source>
+        <translation type="unfinished">Cấu hình</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="297"/>
+        <source>Mods</source>
+        <translation>Mods</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="298"/>
+        <source>Gog files</source>
+        <translation type="unfinished">Tệp Gog</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="301"/>
+        <source>All files (*.*)</source>
+        <translation>Tất cả tệp tin (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="303"/>
+        <source>Select files (configs, mods, maps, campaigns, gog files) to install...</source>
+        <translation>Chọn tập tin (configs, mods, maps, campaigns, gog files) để cài đặt...</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="346"/>
+        <source>This option allows you to import additional data files into your VCMI installation. At the moment, following options are supported:
+
+ - Heroes III Maps (.h3m or .vmap).
+ - Heroes III Campaigns (.h3c or .vcmp).
+ - Heroes III Chronicles using offline backup installer from GOG.com (.exe).
+ - VCMI mods in zip format (.zip)
+ - VCMI configuration files (.json)
+</source>
+        <translation type="unfinished">Tùy chọn này cho phép bạn nhập thêm tệp dữ liệu vào cài đặt VCMI của bạn. Hiện tại, các tùy chọn sau được hỗ trợ:
+
+- Bản đồ Heroes III (.h3m hoặc .vmap).
+- Chiến dịch Heroes III (.h3c hoặc .vcmp).
+- Heroes III Chronicles bằng trình cài đặt sao lưu ngoại tuyến từ GOG.com (.exe).
+- Mod VCMI ở định dạng zip (.zip).
+- Tệp cấu hình VCMI (.json).</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="361"/>
+        <source>Your Heroes III version uses different language. VCMI provides translations of the game into various languages that you can use. Use this option to automatically install such translation to your language.</source>
+        <translation type="unfinished">Phiên bản Heroes III của bạn sử dụng ngôn ngữ khác. VCMI cung cấp bản dịch trò chơi sang nhiều ngôn ngữ mà bạn có thể sử dụng. Sử dụng tùy chọn này để tự động cài đặt bản dịch sang ngôn ngữ của bạn.</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="371"/>
+        <source>Translation of Heroes III into your language is installed, but has been turned off. Use this option to enable it.</source>
+        <translation type="unfinished">Bản dịch Heroes III sang ngôn ngữ của bạn đã được cài đặt nhưng đang bị tắt. Sử dụng tùy chọn này để bật nó.</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="381"/>
+        <source>A new version of some of the mods that you have installed is now available in mod repository. Use this option to automatically update all your mods to latest version.
+
+WARNING: In some cases, updated versions of mods may not be compatible with your existing saves. You may want to postpone mod update until you finish any of your ongoing games.</source>
+        <translation type="unfinished">Một phiên bản mới của một số mod mà bạn đã cài đặt hiện có sẵn trong kho lưu trữ mod. Sử dụng tùy chọn này để tự động cập nhật tất cả các mod của bạn lên phiên bản mới nhất.
+
+CẢNH BÁO: Trong một số trường hợp, các phiên bản cập nhật của mod có thể không tương thích với các bản lưu hiện có của bạn. Bạn có thể muốn hoãn cập nhật mod cho đến khi hoàn thành trò chơi hiện tại của mình.</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="393"/>
+        <source>If you own Heroes Chronicles on gog.com, you can use offline backup installers provided by gog to import Heroes Chronicles data into VCMI as custom campaigns.
+To import Heroes Chronicles, download offline backup installer of each chronicle that you wish to install, select &apos;Import files&apos; option and select downloaded file. This will generate and install mod for VCMI that contains imported chronicles.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="406"/>
+        <source>VCMI has detected that Heroes III music files are missing from your installation. VCMI will run, but in-game music will not be available.
+
+To resolve this problem, please copy missing mp3 files from Heroes III to VCMI data files directory manually or reinstall VCMI and re-import Heroes III data files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="417"/>
+        <source>VCMI has detected that Heroes III video files are missing from your installation. VCMI will run, but in-game cutscenes will not be available.
+
+To resolve this problem, please copy VIDEO.VID file from Heroes III to VCMI data files directory manually or reinstall VCMI and re-import Heroes III data files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="428"/>
+        <source>VCMI has detected that some of Heroes III data files are missing from your installation. You may attempt to run VCMI, but game may not work as expected or crash.
+
+To resolve this problem, please reinstall game and reimport data files using supported version of Heroes III. VCMI requires Heroes III: Shadow of Death or Complete Edition to run, which you can get (for example) from gog.com.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="439"/>
+        <source>VCMI has detected that some of Heroes III: Armageddon&apos;s Blade data files are missing from your installation. VCMI will work, but Armageddon&apos;s Blade campaigns will not be available.
+
+To resolve this problem, please copy missing data files from Heroes III to VCMI data files directory manually or reinstall VCMI and re-import Heroes III data files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="450"/>
+        <source>To improve graphics quality in VCMI, you can install files from the official Heroes III HD version on Steam.Select the Heroes HD folder from Steam.
+
+After installation, you need to set the upscaling filter to x2 or higher in order to actually see the HD graphics.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="489"/>
+        <location filename="../startGame/StartGameTab.cpp" line="498"/>
+        <source>Preset import failed</source>
+        <translation type="unfinished">Nhập preset thất bại</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="489"/>
+        <location filename="../startGame/StartGameTab.cpp" line="498"/>
+        <source>Failed to import preset - data in clipboard does not looks like mod preset!</source>
+        <translation type="unfinished">Không thể nhập preset - dữ liệu trong bảng tạm không giống preset của mod!</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="514"/>
+        <source>Enter preset name:</source>
+        <translation type="unfinished">Nhập tên thiết lập:</translation>
+    </message>
+    <message>
+        <location filename="../startGame/StartGameTab.cpp" line="557"/>
+        <source>Rename preset &apos;%1&apos; to:</source>
+        <translation type="unfinished">Đổi tên thiết lập &apos;%1&apos; thành:</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateDialog</name>
+    <message>
+        <location filename="../updatedialog_moc.ui" line="71"/>
+        <source>You have the latest version</source>
+        <translation>Bạn cài phiên bản mới nhất</translation>
+    </message>
+    <message>
+        <location filename="../updatedialog_moc.ui" line="94"/>
+        <source>Close</source>
+        <translation>Đóng</translation>
+    </message>
+    <message>
+        <location filename="../updatedialog_moc.ui" line="101"/>
+        <source>Check for updates on startup</source>
+        <translation>Kiểm tra bản cập nhật khi khởi động</translation>
+    </message>
+    <message>
+        <location filename="../updatedialog_moc.cpp" line="64"/>
+        <source>Network error</source>
+        <translation>Mạng bị lỗi</translation>
+    </message>
+    <message>
+        <location filename="../updatedialog_moc.cpp" line="101"/>
+        <source>Cannot read JSON from URL or incorrect JSON data</source>
+        <translation>Không thể tải tệp tin JSON hoặc dữ liệu tập tin JSON bị lỗi</translation>
+    </message>
+</context>
+</TS>
