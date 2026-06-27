@@ -720,7 +720,7 @@ void MapRendererPath::renderTile(IMapRendererContext & context, Canvas & target,
 {
 	size_t imageID = selectImage(context, coordinates);
 
-	if (imageID < pathNodes->size() && settings["adventure"]["showMovePath"].Bool())
+	if (imageID < pathNodes->size())
 		target.draw(pathNodes->getImage(imageID), Point(0,0));
 }
 
