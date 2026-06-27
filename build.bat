@@ -9,6 +9,7 @@ set "DEPLOY_DIR=G:\games\VCMI"
 set "CONAN_OUT=%ROOT%\conan-msvc"
 set "DEPS_DIR=%ROOT%\build-deps"
 set "TOOLS_DIR=%DEPS_DIR%\tools"
+set "CONAN_HOME=%DEPS_DIR%\conan-home"
 set "VS_NINJA_DIR=%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja"
 set "VS_VCVARSALL=%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat"
 
@@ -54,17 +55,10 @@ if errorlevel 1 (
 	exit /b 1
 )
 
-if exist "%BUILD_DIR%\CMakeCache.txt" (
-	findstr /r /c:"CMAKE_GENERATOR_PLATFORM:INTERNAL=." "%BUILD_DIR%\CMakeCache.txt" >nul 2>nul
-	if not errorlevel 1 (
-		echo Removing stale Ninja configure cache with Visual Studio platform settings...
-		del "%BUILD_DIR%\CMakeCache.txt" || exit /b 1
-		if exist "%BUILD_DIR%\CMakeFiles" rmdir /s /q "%BUILD_DIR%\CMakeFiles" || exit /b 1
-	)
+if not exist "%BUILD_DIR%\CMakeCache.txt" (
+	echo No CMake cache found. Run setup-deps.bat first to configure.
+	exit /b 1
 )
-
-echo Configuring Ninja build...
-cmake -S "%ROOT%" -B "%BUILD_DIR%" -G Ninja --toolchain "%CONAN_OUT%\conan_toolchain.cmake" -D CMAKE_BUILD_TYPE=%BUILD_CONFIG% -D CMAKE_C_COMPILER=cl -D CMAKE_CXX_COMPILER=cl -D ENABLE_CCACHE=ON || exit /b 1
 
 echo Building %BUILD_CONFIG%...
 cmake --build "%BUILD_DIR%" --parallel || exit /b 1
