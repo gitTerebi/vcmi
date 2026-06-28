@@ -74,6 +74,7 @@ static constexpr std::array upscalingFilterTypes =
 
 static constexpr std::array gpuUpscalingFilterTypes =
 {
+	"none",
 	"xbrz2",
 	"xbrz4",
 	"xsal2",

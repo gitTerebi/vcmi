@@ -329,7 +329,7 @@
 				},
 				"gpuUpscalingFilter" : {
 					"type" : "string",
-					"enum" : [ "xbrz2", "xbrz4", "xsal2", "xsal4" ],
+					"enum" : [ "none", "xbrz2", "xbrz4", "xsal2", "xsal4" ],
 					"default" : "xbrz4"
 				},
 				"downscalingFilter" : {
@@ -337,13 +337,17 @@
 					"enum" : [ "nearest", "linear", "best" ],
 					"default" : "best"
 				},
+				"gpuFiltering" : {
+					"type" : "boolean",
+					"default" : true
+				},
 				"allowPortrait" : {
 					"type" : "boolean",
 					"default" : false
 				},
 				"asyncUpscaling" : {
 					"type" : "boolean",
-					"default" : true
+					"default" : false
 				},
 				"useHdTextures" : {
 					"type" : "boolean",

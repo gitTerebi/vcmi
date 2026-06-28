@@ -735,6 +735,11 @@
         <widget class="QComboBox" name="comboBoxGpuUpscalingFilter">
          <item>
           <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>xBRZ x2</string>
           </property>
          </item>
