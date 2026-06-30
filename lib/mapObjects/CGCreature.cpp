@@ -42,32 +42,77 @@ std::string CGCreature::getHoverText(PlayerColor player) const
 	}
 
 	MetaString ms;
-	CCreature::CreatureQuantityId monsterQuantityId = stacks.begin()->second->getQuantityID();
-	int quantityTextIndex = 172 + 3 * (int)monsterQuantityId;
-	if(settings["gameTweaks"]["numericCreaturesQuantities"].Bool())
-		ms.appendRawString(CCreature::getQuantityRangeStringForId(monsterQuantityId));
-	else
-		ms.appendLocalString(EMetaText::ARRAY_TXT, quantityTextIndex);
+	ms.appendRawString(getQuantityText());
 	ms.appendRawString(" ");
 	ms.appendNamePlural(getCreatureID());
 
 	return ms.toString();
 }
 
+std::string CGCreature::getQuantityText() const
+{
+	MetaString ms;
+	CCreature::CreatureQuantityId monsterQuantityId = stacks.begin()->second->getQuantityID();
+	int quantityTextIndex = 172 + 3 * (int)monsterQuantityId;
+	if(settings["gameTweaks"]["numericCreaturesQuantities"].Bool())
+		ms.appendRawString(CCreature::getQuantityRangeStringForId(monsterQuantityId));
+	else
+		ms.appendLocalString(EMetaText::ARRAY_TXT, quantityTextIndex);
+	return ms.toString();
+}
+
+std::string CGCreature::getVisionsText() const
+{
+	TQuantity count = stacks.begin()->second->getCount();
+	MetaString ms;
+	ms.appendNumber(count);
+	ms.appendRawString(" ");
+	ms.appendName(getCreatureID(), count);
+	return ms.toString();
+}
+
 std::string CGCreature::getHoverText(const CGHeroInstance * hero) const
 {
-	if(hero->hasVisions(this, BonusCustomSubtype::visionsMonsters))
+	bool visions = hero->hasVisions(this, BonusCustomSubtype::visionsMonsters);
+
+	if (settings["general"]["enableUiEnhancements"].Bool())
 	{
+		// format: <Name> (<quantity>, lvl <N>, <threat>)
 		MetaString ms;
-		ms.appendNumber(stacks.begin()->second->getCount());
-		ms.appendRawString(" ");
-		ms.appendName(getCreatureID(), stacks.begin()->second->getCount());
+		ms.appendNamePlural(getCreatureID());
+		ms.appendRawString(" (");
+		ms.appendRawString(visions ? std::to_string(stacks.begin()->second->getCount()) : getQuantityText());
+		ms.appendRawString(", lvl " + std::to_string(getCreature()->getLevel()));
+		ms.appendRawString(", " + getMonsterThreatText(hero) + ")");
 		return ms.toString();
 	}
-	else
-	{
-		return getHoverText(hero->tempOwner);
-	}
+
+	if(visions)
+		return getVisionsText();
+
+	return getHoverText(hero->tempOwner);
+}
+
+std::string CGCreature::getMonsterThreatText(const CGHeroInstance * hero) const
+{
+	int choice;
+	uint64_t armyStrength = getArmyStrength();
+	uint64_t heroStrength = hero->getTotalStrength();
+	double ratio = static_cast<double>(armyStrength) / heroStrength;
+	if (ratio < 0.1)  choice = 0;
+	else if (ratio < 0.25) choice = 1;
+	else if (ratio < 0.6)  choice = 2;
+	else if (ratio < 0.9)  choice = 3;
+	else if (ratio < 1.1)  choice = 4;
+	else if (ratio < 1.3)  choice = 5;
+	else if (ratio < 1.8)  choice = 6;
+	else if (ratio < 2.5)  choice = 7;
+	else if (ratio < 4)    choice = 8;
+	else if (ratio < 8)    choice = 9;
+	else if (ratio < 20)   choice = 10;
+	else                   choice = 11;
+
+	return LIBRARY->generaltexth->translate("vcmi.adventureMap.monsterThreat.levels." + std::to_string(choice));
 }
 
 std::string CGCreature::getMonsterLevelText() const
@@ -88,7 +133,7 @@ std::string CGCreature::getPopupText(const CGHeroInstance * hero) const
 	if(hero->hasVisions(this, BonusCustomSubtype::visionsMonsters))
 	{
 		MetaString ms;
-		ms.appendRawString(getHoverText(hero));
+		ms.appendRawString(getVisionsText());
 		ms.appendRawString("\n\n");
 
 		int decision = takenAction(hero, true);
@@ -120,25 +165,7 @@ std::string CGCreature::getPopupText(const CGHeroInstance * hero) const
 	{
 		hoverName += getMonsterLevelText();
 		hoverName += LIBRARY->generaltexth->translate("vcmi.adventureMap.monsterThreat.title");
-
-		int choice;
-		uint64_t armyStrength = getArmyStrength();
-		uint64_t heroStrength = hero->getTotalStrength();
-		double ratio = static_cast<double>(armyStrength) / heroStrength;
-		if (ratio < 0.1)  choice = 0;
-		else if (ratio < 0.25) choice = 1;
-		else if (ratio < 0.6)  choice = 2;
-		else if (ratio < 0.9)  choice = 3;
-		else if (ratio < 1.1)  choice = 4;
-		else if (ratio < 1.3)  choice = 5;
-		else if (ratio < 1.8)  choice = 6;
-		else if (ratio < 2.5)  choice = 7;
-		else if (ratio < 4)    choice = 8;
-		else if (ratio < 8)    choice = 9;
-		else if (ratio < 20)   choice = 10;
-		else                   choice = 11;
-
-		hoverName += LIBRARY->generaltexth->translate("vcmi.adventureMap.monsterThreat.levels." + std::to_string(choice));
+		hoverName += getMonsterThreatText(hero);
 	}
 	return hoverName;
 }
