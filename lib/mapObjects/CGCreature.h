@@ -58,6 +58,9 @@ public:
 	std::string getHoverText(const CGHeroInstance * hero) const override;
 	std::string getPopupText(PlayerColor player) const override;
 	std::string getPopupText(const CGHeroInstance * hero) const override;
+	std::string getQuantityText() const;
+	std::string getVisionsText() const;
+	std::string getMonsterThreatText(const CGHeroInstance * hero) const;
 	std::vector<Component> getPopupComponents(PlayerColor player) const override;
 	void initObj(IGameRandomizer & gameRandomizer) override;
 	void pickRandomObject(IGameRandomizer & gameRandomizer) override;
