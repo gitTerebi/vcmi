@@ -329,7 +329,7 @@
 				},
 				"gpuUpscalingFilter" : {
 					"type" : "string",
-					"enum" : [ "none", "xbrz2", "xbrz4", "xsal2", "xsal4" ],
+					"enum" : [ "none", "xbrz2", "xbrz4", "xsal2", "xsal4", "fsr", "fsrSharpen" ],
 					"default" : "xbrz4"
 				},
 				"downscalingFilter" : {
