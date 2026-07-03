@@ -139,9 +139,11 @@ class OpenGLGpuUpscaler
 	GLint textureUniform = -1;
 	GLint texelUniform = -1;
 	GLint sourceSizeUniform = -1;
+	GLint passModeUniform = -1;
 	GLuint midFramebuffer = 0;
 	GLuint midTexture = 0;
 	Point midTextureSize;
+	bool fsrFilter = false;
 
 	template<typename Function>
 	static Function loadFunction(const char * name)
@@ -454,7 +456,73 @@ public:
 			}
 		)";
 
-		const char * fragmentShaderSource = filter.rfind("xsal", 0) == 0 ? xsalFragmentShaderSource : xbrzFragmentShaderSource;
+		static constexpr const char * fsrFragmentShaderSource = R"(
+			#version 120
+
+			uniform sampler2D screenTexture;
+			uniform vec2 texelSize;
+			uniform vec2 sourceSize;
+			uniform int passMode;
+
+			vec3 sampleSource(vec2 uv)
+			{
+				return texture2D(screenTexture, uv).rgb;
+			}
+
+			vec3 sharpen(vec2 uv, float amount)
+			{
+				vec3 center = sampleSource(uv);
+				vec3 left = sampleSource(uv + vec2(-texelSize.x, 0.0));
+				vec3 right = sampleSource(uv + vec2(texelSize.x, 0.0));
+				vec3 top = sampleSource(uv + vec2(0.0, -texelSize.y));
+				vec3 bottom = sampleSource(uv + vec2(0.0, texelSize.y));
+				vec3 softMin = min(center, min(min(left, right), min(top, bottom)));
+				vec3 softMax = max(center, max(max(left, right), max(top, bottom)));
+				vec3 edge = center * (1.0 + 4.0 * amount) - amount * (left + right + top + bottom);
+				return clamp(edge, softMin, softMax);
+			}
+
+			vec3 casScale(vec2 uv)
+			{
+				vec2 pixel = uv * sourceSize - vec2(0.5);
+				vec2 basePixel = floor(pixel) + vec2(0.5);
+				vec2 phase = fract(pixel);
+				vec2 baseUv = basePixel * texelSize;
+
+				vec3 c00 = sampleSource(baseUv);
+				vec3 c10 = sampleSource(baseUv + vec2(texelSize.x, 0.0));
+				vec3 c01 = sampleSource(baseUv + vec2(0.0, texelSize.y));
+				vec3 c11 = sampleSource(baseUv + texelSize);
+				vec3 scaled = mix(mix(c00, c10, phase.x), mix(c01, c11, phase.x), phase.y);
+
+				vec3 left = sampleSource(baseUv + vec2(-texelSize.x, 0.0));
+				vec3 right = sampleSource(baseUv + vec2(texelSize.x, 0.0));
+				vec3 top = sampleSource(baseUv + vec2(0.0, -texelSize.y));
+				vec3 bottom = sampleSource(baseUv + vec2(0.0, texelSize.y));
+				vec3 localMin = min(scaled, min(min(left, right), min(top, bottom)));
+				vec3 localMax = max(scaled, max(max(left, right), max(top, bottom)));
+				vec3 contrast = localMax - localMin;
+				float adaptive = clamp(max(contrast.r, max(contrast.g, contrast.b)) * 2.0, 0.0, 1.0);
+				vec3 sharpened = scaled * 1.5 - 0.125 * (left + right + top + bottom);
+				return clamp(mix(scaled, sharpened, adaptive), localMin, localMax);
+			}
+
+			void main()
+			{
+				vec2 uv = gl_TexCoord[0].xy;
+				if(passMode == 1)
+					gl_FragColor = vec4(sharpen(uv, 0.16), 1.0);
+				else
+					gl_FragColor = vec4(casScale(uv), 1.0);
+			}
+		)";
+
+		fsrFilter = filter == "fsr" || filter == "fsrSharpen";
+
+		const char * fragmentShaderSource =
+			fsrFilter ? fsrFragmentShaderSource :
+			filter.rfind("xsal", 0) == 0 ? xsalFragmentShaderSource :
+			xbrzFragmentShaderSource;
 
 		GLuint vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
 		GLuint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
@@ -481,6 +549,7 @@ public:
 		textureUniform = glGetUniformLocation(program, "screenTexture");
 		texelUniform = glGetUniformLocation(program, "texelSize");
 		sourceSizeUniform = glGetUniformLocation(program, "sourceSize");
+		passModeUniform = glGetUniformLocation(program, "passMode");
 		logGlobal->debug("OpenGL GPU upscaling shader initialized");
 	}
 
@@ -512,11 +581,12 @@ public:
 		glEnd();
 	}
 
-	void setXbrzUniforms(const Point & sourceSize)
+	void setUpscalerUniforms(const Point & sourceSize, int passMode)
 	{
 		glUniform1i(textureUniform, 0);
 		glUniform2f(texelUniform, 1.0f / sourceSize.x, 1.0f / sourceSize.y);
 		glUniform2f(sourceSizeUniform, sourceSize.x, sourceSize.y);
+		glUniform1i(passModeUniform, passMode);
 	}
 
 	bool render(SDL_Texture * texture, const Point & sourceSize, bool secondPass)
@@ -558,7 +628,7 @@ public:
 
 		glBindFramebuffer(GL_FRAMEBUFFER, midFramebuffer);
 		glViewport(0, 0, midTextureSize.x, midTextureSize.y);
-		setXbrzUniforms(sourceSize);
+		setUpscalerUniforms(sourceSize, 0);
 		renderQuad(textureWidth, textureHeight);
 		SDL_GL_UnbindTexture(texture);
 
@@ -566,7 +636,7 @@ public:
 		glViewport(0, 0, outputSize.x, outputSize.y);
 		glBindTexture(GL_TEXTURE_2D, midTexture);
 		if(secondPass)
-			setXbrzUniforms(midTextureSize);
+			setUpscalerUniforms(midTextureSize, fsrFilter ? 1 : 0);
 		else
 		{
 			glUseProgram(0);
@@ -901,7 +971,7 @@ void ScreenHandler::initializeWindow()
 	logGlobal->info("Created renderer %s", info.name);
 
 	const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
-	if((gpuFilter == "xbrz2" || gpuFilter == "xbrz4" || gpuFilter == "xsal2" || gpuFilter == "xsal4") && std::string(info.name) == "opengl")
+	if((gpuFilter == "xbrz2" || gpuFilter == "xbrz4" || gpuFilter == "xsal2" || gpuFilter == "xsal4" || gpuFilter == "fsr" || gpuFilter == "fsrSharpen") && std::string(info.name) == "opengl")
 		gpuUpscaler = std::make_unique<OpenGLGpuUpscaler>(gpuFilter);
 }
 
@@ -1240,7 +1310,7 @@ void ScreenHandler::presentScreenTexture()
 	if(gpuUpscaler && gpuUpscaler->available())
 	{
 		const auto gpuFilter = settings["video"]["gpuUpscalingFilter"].String();
-		renderedWithGpuUpscaler = gpuUpscaler->render(screenTexture, Point(screen->w, screen->h), gpuFilter == "xbrz4" || gpuFilter == "xsal4");
+		renderedWithGpuUpscaler = gpuUpscaler->render(screenTexture, Point(screen->w, screen->h), gpuFilter == "xbrz4" || gpuFilter == "xsal4" || gpuFilter == "fsrSharpen");
 	}
 
 	if(!renderedWithGpuUpscaler)

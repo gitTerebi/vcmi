@@ -758,6 +758,16 @@
            <string>xSaL x4</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>FSR</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>FSR + Sharpen</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="22" column="1" colspan="5">
