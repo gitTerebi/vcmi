@@ -403,6 +403,9 @@ void HeroMovementController::sendMovementRequest(const CGHeroInstance * h, const
 			int3 coord = h->convertFromVisitablePos(node.coord);
 			pathToMove.push_back(coord);
 
+			if (node.moveRemains == 0)
+				break; // no movement points left after this tile - server would reject any further step this turn (e.g. boat reaching its last reachable sea tile)
+
 			if (GAME->interface()->cb->guardingCreaturePosition(node.coord) != int3(-1, -1, -1))
 				break; // we reached zone-of-control of wandering monster
 

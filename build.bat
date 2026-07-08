@@ -73,9 +73,13 @@ if exist "%BUILD_DIR%\bin\config" (
 	robocopy "%BUILD_DIR%\bin\config" "%DEPLOY_DIR%\config" /E /XO /COPY:DAT /DCOPY:DAT /R:3 /W:1 /XJ
 	if errorlevel 8 exit /b 1
 )
-if exist "%ROOT%\Mods\vcmi\Content\config\translations\english.json" (
-	if not exist "%DEPLOY_DIR%\Mods\vcmi\Content\config\translations" mkdir "%DEPLOY_DIR%\Mods\vcmi\Content\config\translations" || exit /b 1
-	copy /Y "%ROOT%\Mods\vcmi\Content\config\translations\english.json" "%DEPLOY_DIR%\Mods\vcmi\Content\config\translations\english.json" >nul || exit /b 1
+if exist "%ROOT%\scripts" (
+	robocopy "%ROOT%\scripts" "%DEPLOY_DIR%\scripts" /E /COPY:DAT /DCOPY:DAT /R:3 /W:1 /XJ
+	if errorlevel 8 exit /b 1
+)
+if exist "%ROOT%\Mods" (
+	robocopy "%ROOT%\Mods" "%DEPLOY_DIR%\Mods" /E /COPY:DAT /DCOPY:DAT /R:3 /W:1 /XJ
+	if errorlevel 8 exit /b 1
 )
 
 echo Done. Built files are in %BUILD_DIR%\bin.
