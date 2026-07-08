@@ -382,7 +382,7 @@ std::string CBuildingRect::getSubtitle()//hover text for building
 		if(availableCreatures.size())
 		{
 			int creaID = availableCreatures.back();//taking last of available creatures
-			return LIBRARY->generaltexth->allTexts[16] + " " + LIBRARY->creh->objects.at(creaID)->getNamePluralTranslated();
+			return LIBRARY->generaltexth->allTexts[16] + " " + LIBRARY->creh->objects.at(creaID)->getNamePluralTranslated() + " (Ctrl+click - recruit all)";
 		}
 		else
 		{
@@ -1143,11 +1143,45 @@ void CCastleBuildings::enterDwelling(int level)
 		return;
 	}
 
+	if(ENGINE->isKeyboardCtrlDown()) // ctrl+click - recruit all affordable
+	{
+		si32 available = town->creatures[level].first;
+		CreatureID creatureId = town->creatures[level].second.back();
+		si32 maxAmount = creatureId.toCreature()->maxAmount(GAME->interface()->cb->getResourceAmount());
+		vstd::amin(maxAmount, available);
+
+		if(maxAmount > 0)
+			GAME->interface()->cb->recruitCreatures(town, town->getUpperArmy(), creatureId, maxAmount, level);
+		return;
+	}
+
 	auto recruitCb = [this, level](CreatureID id, int count)
 	{
 		GAME->interface()->cb->recruitCreatures(town, town->getUpperArmy(), id, count, level);
 	};
 	ENGINE->windows().createAndPushWindow<CRecruitmentWindow>(town, level, town->getUpperArmy(), recruitCb, nullptr, -87);
+}
+
+void CCastleBuildings::recruitAllAffordable()
+{
+	TResources budget = GAME->interface()->cb->getResourceAmount();
+	size_t levels = std::min(town->creatures.size(), town->getTown()->creatures.size());
+	for(size_t level = levels; level-- > 0; ) // highest tier first
+	{
+		si32 available = town->creatures[level].first;
+		if(available <= 0 || town->creatures[level].second.empty())
+			continue;
+
+		const CCreature * creature = town->creatures[level].second.back().toCreature();
+		si32 maxAmount = creature->maxAmount(budget);
+		vstd::amin(maxAmount, available);
+
+		if(maxAmount > 0)
+		{
+			budget -= creature->getFullRecruitCost() * maxAmount; // spend so next levels see remaining gold
+			GAME->interface()->cb->recruitCreatures(town, town->getUpperArmy(), creature->getId(), maxAmount, level);
+		}
+	}
 }
 
 void CCastleBuildings::enterToTheQuickRecruitmentWindow()
@@ -1475,8 +1509,13 @@ void CTownInfo::hover(bool on)
 {
 	if(on)
 	{
-		if(building )
-			ENGINE->statusbar()->write(building->getNameTranslated());
+		if(building)
+		{
+			std::string text = building->getNameTranslated();
+			if(building->bid >= BuildingID::FORT && building->bid <= BuildingID::CASTLE) // fort spot overlaps recruit-all button
+				text += " (Ctrl+click - recruit all)";
+			ENGINE->statusbar()->write(text);
+		}
 	}
 	else
 	{
@@ -1706,7 +1745,7 @@ void CCastleInterface::recreateIcons()
 	fastTownHall->setOverlay(std::make_shared<CAnimImage>(AnimationPath::builtin("ITMTL"), town->hallLevel()));
 
 	int imageIndex = town->fortLevel() == CGTownInstance::EFortLevel::NONE ? 3 : town->fortLevel() - 1;
-	fastArmyPurchase = std::make_shared<CButton>(Point(122, 413), AnimationPath::builtin("castleInterfaceQuickAccess"), CButton::tooltip(), [this](){ builds->enterToTheQuickRecruitmentWindow(); }, EShortcut::TOWN_OPEN_RECRUITMENT);
+	fastArmyPurchase = std::make_shared<CButton>(Point(122, 413), AnimationPath::builtin("castleInterfaceQuickAccess"), CButton::tooltip(LIBRARY->generaltexth->allTexts[16] + " (Ctrl+click - recruit all)"), [this](){ if(ENGINE->isKeyboardCtrlDown()) builds->recruitAllAffordable(); else builds->enterToTheQuickRecruitmentWindow(); }, EShortcut::TOWN_OPEN_RECRUITMENT);
 	fastArmyPurchase->setOverlay(std::make_shared<CAnimImage>(AnimationPath::builtin("itmcl"), imageIndex));
 
 	fastMarket = std::make_shared<LRClickableArea>(Rect(163, 410, 64, 42), [this]() { builds->enterAnyMarket(); });
@@ -2226,7 +2265,7 @@ CFortScreen::RecruitArea::RecruitArea(int posX, int posY, const CGTownInstance *
 
 	if(getMyCreature() != nullptr)
 	{
-		hoverText = boost::str(boost::format(LIBRARY->generaltexth->tcommands[21]) % getMyCreature()->getNamePluralTranslated());
+		hoverText = boost::str(boost::format(LIBRARY->generaltexth->tcommands[21]) % getMyCreature()->getNamePluralTranslated()) + " (Ctrl+click - recruit all)";
 		new CCreaturePic(159, 4, getMyCreature(), false);
 		new CLabel(78,  11, FONT_SMALL, ETextAlignment::CENTER, Colors::WHITE, getMyCreature()->getNamePluralTranslated(), 152);
 

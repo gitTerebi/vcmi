@@ -178,6 +178,7 @@ public:
 	void enterAnyThievesGuild();
 	void enterBank(BuildingID building);
 	void enterToTheQuickRecruitmentWindow();
+	void recruitAllAffordable();
 
 	bool buildingTryActivateCustomUI(BuildingID buildingToTest, BuildingID buildingTarget);
 	void buildingClicked(BuildingID building);
