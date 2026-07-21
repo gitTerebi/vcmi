@@ -9,11 +9,7 @@
  */
 #pragma once
 
-#include <set>
-
-VCMI_LIB_NAMESPACE_BEGIN
 class Point;
-VCMI_LIB_NAMESPACE_END
 
 class AEventsReceiver;
 enum class MouseButton;
@@ -41,6 +37,8 @@ class EventDispatcher
 	EventReceiversList inputModeChangeInterested;
 	EventReceiversList keyNameInterested;
 	std::set<EShortcut> pressedShortcuts;
+
+	std::vector<AEventsReceiver *> touchPressedElements;
 
 	void handleLeftButtonClick(const Point & position, int tolerance, bool isPressed);
 	void handleDoubleButtonClick(const Point & position, int tolerance);
@@ -91,4 +89,6 @@ public:
 	void dispatchTextEditing(const std::string & text);
 
 	void dispatchInputModeChanged(const InputMode & modi);
+
+	void dispatchTouchPress(const Point & position, bool down, int tolerance);
 };

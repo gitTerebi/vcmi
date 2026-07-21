@@ -17,8 +17,6 @@
 #include "SetStackEffect.h"
 #include "NetPackVisitor.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
 void CPack::visit(ICPackVisitor & visitor)
 {
 	visitBasic(visitor);
@@ -72,6 +70,11 @@ void SaveLocalState::visitTyped(ICPackVisitor & visitor)
 void PackageApplied::visitTyped(ICPackVisitor & visitor)
 {
 	visitor.visitPackageApplied(*this);
+}
+
+void QueryResolved::visitTyped(ICPackVisitor & visitor)
+{
+	visitor.visitQueryResolved(*this);
 }
 
 void PackageReceived::visitTyped(ICPackVisitor & visitor)
@@ -902,5 +905,3 @@ void AdvInterfaceReady::visitTyped(ICPackVisitor & visitor)
 {
 	visitor.visitAdvInterfaceReady(*this);
 }
-
-VCMI_LIB_NAMESPACE_END

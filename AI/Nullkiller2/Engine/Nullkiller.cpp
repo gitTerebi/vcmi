@@ -20,6 +20,7 @@
 #include "../Behaviors/CaptureObjectsBehavior.h"
 #include "../Behaviors/ClusterBehavior.h"
 #include "../Behaviors/DefenceBehavior.h"
+#include "../Behaviors/DefenceBehaviorUtils.h"
 #include "../Behaviors/EscapeBehavior.h"
 #include "../Behaviors/ExplorationBehavior.h"
 #include "../Behaviors/GatherArmyBehavior.h"
@@ -66,6 +67,14 @@ bool canUseOpenMap(const std::shared_ptr<CCallback>& cb, const PlayerColor playe
 	);
 
 	return !hasHumanInTeam;
+}
+
+std::vector<HitMapInfo> getTownThreatsForDefenderReservation(const CGTownInstance * town, const Nullkiller * aiNk)
+{
+	std::vector<HitMapInfo> threats = aiNk->dangerHitMap->getTownThreats(town);
+	threats.push_back(aiNk->dangerHitMap->getObjectThreat(town).fastestDanger);
+
+	return threats;
 }
 
 void Nullkiller::init(const std::shared_ptr<CCallback> & cbInput, AIGateway * aiGwInput)
@@ -360,12 +369,129 @@ void Nullkiller::updateState()
 	}
 }
 
+const CGHeroInstance * Nullkiller::findRequiredTownDefender(const CGTownInstance * town) const
+{
+	const auto threats = getTownThreatsForDefenderReservation(town, this);
+	const auto safeAttackRatio = settings->getSafeAttackRatio();
+	const CGHeroInstance * result = nullptr;
+	int bestCoveredThreats = 0;
+	uint64_t bestStrength = 0;
+
+	const auto evaluateHero = [&](const CGHeroInstance * hero)
+	{
+		if(!hero)
+			return;
+
+		const int coveredThreats = Goals::countTownThreatsCoveredByDefender(*town, *hero, threats, safeAttackRatio);
+		const bool reserveDefender = Goals::shouldReserveTownDefender(*town, *hero, threats, safeAttackRatio);
+		const uint64_t strength = hero->getTotalStrength();
+
+		if(!reserveDefender)
+			return;
+
+		if(coveredThreats > bestCoveredThreats || (coveredThreats == bestCoveredThreats && strength > bestStrength))
+		{
+			result = hero;
+			bestCoveredThreats = coveredThreats;
+			bestStrength = strength;
+		}
+	};
+
+	evaluateHero(town->getGarrisonHero());
+	evaluateHero(town->getVisitingHero());
+
+	return result;
+}
+
+void Nullkiller::reserveRequiredTownDefenders()
+{
+	// Only urgent town threats reserve heroes here. Safe garrison heroes must
+	// stay available for extraction, otherwise large town armies become idle.
+	for(const auto * town : cc->getTownsInfo())
+	{
+		const auto * defender = findRequiredTownDefender(town);
+
+		if(!defender || getHeroLockedReason(defender) != HeroLockedReason::NOT_LOCKED)
+			continue;
+
+		logAi->debug("Reserving %s as defender of %s", defender->getNameTranslated(), town->getNameTranslated());
+		lockedHeroes[defender] = HeroLockedReason::DEFENCE;
+	}
+}
+
 bool Nullkiller::isHeroLocked(const CGHeroInstance * hero) const
 {
 	return getHeroLockedReason(hero) != HeroLockedReason::NOT_LOCKED;
 }
 
-bool Nullkiller::arePathHeroesLocked(const AIPath & path) const
+void Nullkiller::lockHero(const CGHeroInstance * hero, HeroLockedReason lockReason)
+{
+	if(!hero)
+		return;
+
+	lockedHeroes[hero] = lockReason;
+}
+
+void Nullkiller::unlockHero(const CGHeroInstance * hero)
+{
+	if(!hero)
+		return;
+
+	lockedHeroes.erase(hero);
+}
+
+bool defenderMakesTownStableAfterTurnEnd(const CGTownInstance * town, const CGHeroInstance * defender, const Nullkiller * aiNk)
+{
+	const auto threats = getTownThreatsForDefenderReservation(town, aiNk);
+	const auto defence = Goals::estimateTownDefence(*town, defender);
+	const auto safeAttackRatio = aiNk->settings->getSafeAttackRatio();
+
+	for(const auto & threat : threats)
+	{
+		if(threat.danger == 0 || threat.turn > 1)
+			continue;
+
+		if(!Goals::isTownDefenceSufficient(defence, threat, safeAttackRatio))
+			return false;
+	}
+
+	return true;
+}
+
+bool Nullkiller::canReleaseDefenderForTownCapture(const CGHeroInstance * hero, const CGObjectInstance * target, const AIPath & path) const
+{
+	if(!hero || !target || path.targetHero != hero)
+		return false;
+
+	if(getHeroLockedReason(hero) != HeroLockedReason::DEFENCE)
+		return false;
+
+	if(path.exchangeCount != 1 || path.turn() > 1 || path.getFirstBlockedAction())
+		return false;
+
+	const auto * defendedTown = hero->getVisitedTown();
+	if(!defendedTown || defendedTown->getOwner() != playerID)
+		return false;
+
+	if(defendedTown->getGarrisonHero() != hero && defendedTown->getVisitingHero() != hero)
+		return false;
+
+	const auto relation = cc->getPlayerRelations(target->tempOwner, playerID);
+	const auto defenderMakesHomeStable = defenderMakesTownStableAfterTurnEnd(defendedTown, hero, this);
+	const auto remainingTownReinforcement = armyManager->howManyReinforcementsCanBuy(defendedTown->getUpperArmy(), defendedTown);
+	const auto calendar = cc->getCalendar();
+
+	return Goals::isDefenderReleaseAllowedForTownCapture(
+		*hero,
+		*target,
+		relation == PlayerRelations::ENEMIES,
+		defenderMakesHomeStable,
+		remainingTownReinforcement,
+		calendar.getDayOfWeek(),
+		calendar.getDaysInWeek());
+}
+
+bool Nullkiller::arePathHeroesLocked(const AIPath & path, const CGHeroInstance * releasedDefender) const
 {
 	if(getHeroLockedReason(path.targetHero) == HeroLockedReason::STARTUP)
 	{
@@ -381,6 +507,9 @@ bool Nullkiller::arePathHeroesLocked(const AIPath & path) const
 
 		if(lockReason != HeroLockedReason::NOT_LOCKED)
 		{
+			if(releasedDefender && node.targetHero == releasedDefender && lockReason == HeroLockedReason::DEFENCE)
+				continue;
+
 #if NK2AI_TRACE_LEVEL >= 1
 			logAi->trace("Hero %s is locked by %d. Discarding %s", path.targetHero->getObjectName(), (int)lockReason,  path.toString());
 #endif
@@ -416,6 +545,8 @@ void Nullkiller::makeTurn()
 
 		if (!updateStateAndExecutePriorityPass(tasks, pass))
 			return;
+
+		reserveRequiredTownDefenders();
 
 		tasks.clear();
 		decompose(tasks, sptr(CaptureObjectsBehavior()), 1);
@@ -755,9 +886,6 @@ HeroMap<HeroRole> Nullkiller::getHeroesForPathfinding() const
 	HeroMap<HeroRole> activeHeroes;
 	for(auto hero : cc->getHeroesInfo())
 	{
-		if(getHeroLockedReason(hero) == HeroLockedReason::DEFENCE)
-			continue;
-
 		activeHeroes[hero] = heroManager->getHeroRoleOrDefaultInefficient(hero);
 	}
 	return activeHeroes;

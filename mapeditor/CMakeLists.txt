@@ -46,6 +46,7 @@ set(editor_SRCS
 		inspector/playerselectionwidget.cpp
 		inspector/abilitieswidget.cpp
 		inspector/scholarwidget.cpp
+		inspector/shrinewidget.cpp
 		resourceExtractor/ResourceConverter.cpp
 		helper.cpp
 		campaigneditor/campaigneditor.cpp
@@ -76,6 +77,7 @@ endif()
 set(editor_HEADERS
 		StdInc.h
 		mainwindow.h
+		editorbridge.h
 		BitmapHandler.h
 		maphandler.h
 		Animation.h
@@ -120,6 +122,8 @@ set(editor_HEADERS
 		inspector/playerselectionwidget.h
 		inspector/abilitieswidget.h
 		inspector/scholarwidget.h
+		inspector/shrinewidget.h
+		inspector/WidgetInitializationException.h
 		resourceExtractor/ResourceConverter.h
 		mapeditorroles.h
 		helper.h
@@ -180,6 +184,7 @@ set(editor_FORMS
 		inspector/playerselectionwidget.ui
 		inspector/abilitieswidget.ui
 		inspector/scholarwidget.ui
+		inspector/shrinewidget.ui
 		campaigneditor/campaigneditor.ui
 		campaigneditor/campaignproperties.ui
 		campaigneditor/scenarioproperties.ui
@@ -337,6 +342,9 @@ target_compile_definitions(vcmieditor PRIVATE QT_NO_EMIT)
 
 if(ENABLE_STATIC_LIBS OR NOT (ENABLE_EDITOR AND ENABLE_LAUNCHER))
 	target_compile_definitions(vcmieditor PRIVATE VCMIQT_STATIC)
+endif()
+if(ENABLE_TRANSLATIONS)
+	target_compile_definitions(vcmieditor PRIVATE ENABLE_TRANSLATIONS)
 endif()
 
 target_link_libraries(vcmieditor vcmi vcmiqt Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)

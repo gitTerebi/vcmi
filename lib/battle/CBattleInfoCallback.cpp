@@ -32,8 +32,6 @@
 #include "../Rect.h"
 #include "../spells/effects/Effect.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
 static BattleHex lineToWallHex(int line) //returns hex with wall in given line (y coordinate)
 {
 	static const BattleHex lineToHex[] = {12, 29, 45, 62, 78, 96, 112, 130, 147, 165, 182};
@@ -145,14 +143,24 @@ ESpellCastProblem CBattleInfoCallback::battleCanCastSpell(const spells::Caster *
 			return ESpellCastProblem::NO_HERO_TO_CAST_SPELL;
 		if(!hero->hasSpellbook())
 			return ESpellCastProblem::NO_SPELLBOOK;
-		if(hero->hasBonusOfType(BonusType::BLOCK_ALL_MAGIC))
-			return ESpellCastProblem::MAGIC_IS_BLOCKED;
 		if(battleCastSpells(side) >= hero->valOfBonuses(BonusType::HERO_SPELL_CASTS_PER_COMBAT_TURN))
 			return ESpellCastProblem::CASTS_PER_TURN_LIMIT;
 	}
 		break;
 	default:
 		break;
+	}
+
+	//Orb of Inhibition blocks active spellcasting (hero and creature active abilities),
+	//but not passive/triggered casts such as SPELL_BEFORE_ATTACK / SPELL_AFTER_ATTACK.
+	//Level-0 creature abilities are excluded from this block in BattleSpellMechanics::canBeCast (spell level known there)
+	if(mode == spells::Mode::HERO || mode == spells::Mode::CREATURE_ACTIVE)
+	{
+		const IBonusBearer * casterBonuses = caster->getHeroCaster();
+		if(!casterBonuses)
+			casterBonuses = battleGetUnitByID(caster->getCasterUnitId());
+		if(casterBonuses && casterBonuses->hasBonusOfType(BonusType::BLOCK_ALL_MAGIC))
+			return ESpellCastProblem::MAGIC_IS_BLOCKED;
 	}
 
 	return ESpellCastProblem::OK;
@@ -1184,7 +1192,6 @@ DamageEstimation CBattleInfoCallback::battleEstimateDamage(const BattleAttackInf
 	if (bai.attacker->hasBonusOfType(BonusType::BLOCKS_RETALIATION) || bai.attacker->isInvincible() || isLongWeaponAttack(bai.attacker, bai.defender))
 		return ret;
 
-	//TODO: rewrite using boost::numeric::interval
 	//TODO: rewire once more using interval-based fuzzy arithmetic
 
 	const auto & estimateRetaliation = [&](int64_t damage)
@@ -1276,14 +1283,18 @@ bool CBattleInfoCallback::handleObstacleTriggersForUnit(SpellCastEnvironment & s
 
 				BattleObstaclesChanged bocp;
 				bocp.battleID = getBattle()->getBattleID();
-				bocp.changes.emplace_back(spellObstacle.uniqueID, operation);
-				changedObstacle.toInfo(bocp.changes.back(), operation);
+				bocp.change = ObstacleChanges(spellObstacle.uniqueID, operation);
+				changedObstacle.toInfo(bocp.change, operation);
 				spellEnv.apply(bocp);
 			};
 			const auto side = unit.unitSide();
 			auto shouldReveal = !spellObstacle->hidden || !battleIsObstacleVisibleForSide(*obstacle, side);
-			const auto * hero = battleGetFightingHero(spellObstacle->casterSide);
-			auto caster = spells::ObstacleCasterProxy(getBattle()->getSidePlayer(spellObstacle->casterSide), hero, *spellObstacle);
+			// A neutral obstacle (casterSide == NONE) belongs to no side and must impede units of both sides;
+			// treat it as hostile to whichever unit triggered it so its effect still applies (and to avoid an invalid side lookup)
+			const bool neutralObstacle = spellObstacle->casterSide != BattleSide::ATTACKER && spellObstacle->casterSide != BattleSide::DEFENDER;
+			const auto casterSide = neutralObstacle ? otherSide(side) : spellObstacle->casterSide;
+			const auto * hero = neutralObstacle ? nullptr : battleGetFightingHero(casterSide);
+			auto caster = spells::ObstacleCasterProxy(getBattle()->getSidePlayer(casterSide), hero, *spellObstacle);
 
 			if(obstacle->triggersEffects() && obstacle->getTrigger().hasValue())
 			{
@@ -2462,5 +2473,3 @@ const scripting::Pool & CBattleInfoCallback::getScriptContextPool() const
 {
 	return getBattle()->getScriptContextPool();
 }
-
-VCMI_LIB_NAMESPACE_END

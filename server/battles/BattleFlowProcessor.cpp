@@ -258,7 +258,7 @@ void BattleFlowProcessor::castOpeningSpells(const CBattleInfoCallback & battle)
 			int32_t spellLevel = b->parameters ? b->parameters->toNumber() : 3;
 			parameters.setSpellLevel(spellLevel);
 			parameters.setEffectDuration(b->val);
-			parameters.massive = true;
+			parameters.forceMassive = true;
 			parameters.castIfPossible(gameHandler->spellcastEnvironment(), spells::Target());
 		}
 	}
@@ -926,7 +926,7 @@ void BattleFlowProcessor::removeObstacle(const CBattleInfoCallback & battle, con
 {
 	BattleObstaclesChanged obsRem;
 	obsRem.battleID = battle.getBattle()->getBattleID();
-	obsRem.changes.emplace_back(obstacle.uniqueID, ObstacleChanges::EOperation::REMOVE);
+	obsRem.change = ObstacleChanges(obstacle.uniqueID, ObstacleChanges::EOperation::REMOVE);
 	gameHandler->sendAndApply(obsRem);
 }
 
@@ -970,7 +970,7 @@ void BattleFlowProcessor::stackTurnTrigger(const CBattleInfoCallback & battle, c
 			}
 		}
 
-		if (st->hasBonusOfType(BonusType::POISON))
+		if (st->hasBonusOfType(BonusType::POISON) && !st->waiting)
 		{
 			std::shared_ptr<const Bonus> b = st->getFirstBonus(Selector::source(BonusSource::SPELL_EFFECT, BonusSourceID(SpellID(SpellID::POISON))).And(Selector::type()(BonusType::STACK_HEALTH)));
 			if (b) //TODO: what if not?...
@@ -1037,7 +1037,7 @@ void BattleFlowProcessor::stackTurnTrigger(const CBattleInfoCallback & battle, c
 				parameters.setSpellLevel(bonus->val);
 
 				//todo: recheck effect level
-				if(parameters.castIfPossible(gameHandler->spellcastEnvironment(), spells::Target(1, parameters.massive ? spells::Destination() : spells::Destination(st))))
+				if(parameters.castIfPossible(gameHandler->spellcastEnvironment(), spells::Target(1, parameters.forceMassive ? spells::Destination() : spells::Destination(st))))
 				{
 					cast = true;
 

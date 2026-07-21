@@ -11,12 +11,11 @@
 #include "../Goals/CGoal.h"
 #include "../Pathfinding/AIPathfinder.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
-VCMI_LIB_NAMESPACE_END
-
 namespace NK2AI
 {
+
+float evaluateEnemyTownConquestValue(float baseValue, int visibleEnemyTownCount);
+float evaluateMaxArmyLossForConquest(float baseMaxArmyLoss, float conquestValue, bool isEnemyTownConquest);
 
 class BuildingInfo;
 class Nullkiller;

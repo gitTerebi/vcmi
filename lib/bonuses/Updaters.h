@@ -12,8 +12,6 @@
 #include "Bonus.h"
 #include "../serializer/Serializeable.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
 class AggregateLimiter;
 class CCreatureTypeLimiter;
 class HasAnotherBonusLimiter;
@@ -76,8 +74,7 @@ public:
 	template <typename Handler> void serialize(Handler & h)
 	{
 		h & static_cast<IUpdater &>(*this);
-		if (h.hasFeature(Handler::Version::UNIVERSITY_CONFIG))
-			h & stepSize;
+		h & stepSize;
 	}
 
 	std::shared_ptr<Bonus> createUpdatedBonus(const std::shared_ptr<Bonus> & b, const CBonusSystemNode & context) const override;
@@ -203,5 +200,3 @@ public:
 		h & updaters;
 	}
 };
-
-VCMI_LIB_NAMESPACE_END

@@ -16,8 +16,6 @@
 #include "../mapObjects/CGHeroInstance.h"
 #include "../CStack.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
 std::shared_ptr<Bonus> IUpdater::createUpdatedBonus(const std::shared_ptr<Bonus> & b, const CBonusSystemNode & context) const
 {
 	return b;
@@ -138,7 +136,9 @@ std::shared_ptr<Bonus> TimesStackSizeUpdater::createUpdatedBonus(const std::shar
 		const auto & stack = dynamic_cast<const CStack &>(context);
 		return apply(b, stack.getCount());
 	}
-	return b;
+	// no stack context (e.g. creature-type reference): contribute the floor value
+	// instead of leaking the bonus template val, which would inflate the base stat
+	return apply(b, 0);
 }
 
 std::string TimesStackSizeUpdater::toString() const
@@ -314,5 +314,3 @@ std::shared_ptr<Bonus> CompositeUpdater::createUpdatedBonus(const std::shared_pt
 
 	return result;
 }
-
-VCMI_LIB_NAMESPACE_END

@@ -23,7 +23,6 @@
 #include "../constants/StringConstants.h"
 #include "../modding/IdentifierStorage.h"
 
-VCMI_LIB_USING_NAMESPACE
 
 template <typename T>
 const T parseByMap(const std::map<std::string, T> & map, const JsonNode * val, const std::string & err)
@@ -324,7 +323,6 @@ static TBonusParametersPtr loadBonusAddInfo(BonusType type, const JsonNode & val
 				if (effect["action"].String() == "spell")
 				{
 					int mastery = effect["mastery"].Integer();
-					const auto bonus = JsonUtils::parseBonus(effect["bonus"]);
 					loadedData.effects.push_back(BonusParametersOnCombatEvent::CombatEffectSpell{
 						SpellID(), mastery, targetEnemy
 					});
@@ -541,8 +539,6 @@ static TUpdaterPtr parseUpdater(const JsonNode & updaterJson)
 	}
 	return nullptr;
 }
-
-VCMI_LIB_NAMESPACE_BEGIN
 
 std::shared_ptr<Bonus> JsonUtils::parseBonus(const JsonVector & ability_vec)
 {
@@ -1039,5 +1035,3 @@ CSelector JsonUtils::parseSelector(const JsonNode & ability)
 
 	return ret;
 }
-
-VCMI_LIB_NAMESPACE_END

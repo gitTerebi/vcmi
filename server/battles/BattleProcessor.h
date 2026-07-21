@@ -13,7 +13,6 @@
 #include "../../lib/constants/Enumerations.h"
 #include "../../lib/battle/BattleSide.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
 class CGHeroInstance;
 class CGTownInstance;
 class CArmedInstance;
@@ -23,7 +22,6 @@ class CBattleInfoCallback;
 struct BattleResult;
 struct BattleLayout;
 class BattleID;
-VCMI_LIB_NAMESPACE_END
 
 class CGameHandler;
 class CBattleQuery;
@@ -66,6 +64,8 @@ public:
 
 	/// Processing of incoming battle action netpack
 	bool makePlayerBattleAction(const BattleID & battleID, PlayerColor player, const BattleAction & ba);
+	/// Kills the opposing army and resolves the current battle in player's favor
+	void cheatBattleVictory(PlayerColor player);
 
 	/// Applies results of a battle once player agrees to them
 	void endBattleConfirm(const BattleID & battleID);

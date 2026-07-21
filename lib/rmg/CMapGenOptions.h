@@ -14,8 +14,6 @@
 #include "../serializer/Serializeable.h"
 #include "CRmgTemplate.h"
 
-VCMI_LIB_NAMESPACE_BEGIN
-
 namespace vstd
 {
 class RNG;
@@ -190,22 +188,7 @@ public:
 	{
 		h & width;
 		h & height;
-		if (h.version >= Handler::Version::MORE_MAP_LAYERS)
-			h & levels;
-		else
-		{
-			if (h.saving)
-			{
-				bool hasTwoLevels = levels == 2;
-				h & hasTwoLevels;
-			}
-			else
-			{
-				bool hasTwoLevels;
-				h & hasTwoLevels;
-				levels = hasTwoLevels ? 2 : 1;
-			}
-		}
+		h & levels;
 		h & humanOrCpuPlayerCount;
 		h & teamCount;
 		h & compOnlyPlayerCount;
@@ -229,5 +212,3 @@ public:
 
 	void serializeJson(JsonSerializeFormat & handler);
 };
-
-VCMI_LIB_NAMESPACE_END
