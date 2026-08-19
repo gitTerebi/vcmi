@@ -35,33 +35,6 @@ namespace spells
 namespace effects
 {
 
-LuaSpellEffectFactory::LuaSpellEffectFactory(scripting::LuaModule & host)
-	:host(host)
-{
-
-}
-
-LuaSpellEffectFactory::~LuaSpellEffectFactory() = default;
-
-void LuaSpellEffectFactory::initialize(const std::string & effectId,
-	const std::string & scope, const std::string & name,
-	const std::vector<PatchEntry> & patches)
-{
-	auto loadedScript = std::make_unique<scripting::LuaScriptInstance>(host, scope, name, patches);
-	loadedScripts[effectId] = std::move(loadedScript);
-}
-
-std::shared_ptr<Effect> LuaSpellEffectFactory::create(const std::string & effectId) const
-{
-	return std::make_shared<LuaSpellEffect>(loadedScripts.at(effectId).get());
-}
-
-void LuaSpellEffectFactory::registerScripts(scripting::LuaScriptPool * pool)
-{
-	for (const auto & script : loadedScripts)
-		pool->registerScript(script.second.get());
-}
-
 LuaSpellEffect::LuaSpellEffect(const LuaScriptInstance * script_)
 	: script(script_)
 {

@@ -27,7 +27,6 @@ namespace BuildingSubID
 		MYSTIC_POND,
 		LIBRARY,
 		PORTAL_OF_SUMMONING,
-		ESCAPE_TUNNEL,
 		TREASURY,
 		BANK,
 		AURORA_BOREALIS
@@ -276,4 +275,6 @@ enum class CombatEventType : int8_t
 	BEFORE_MOVE = 7,
 	AFTER_MOVE = 8,
 	UNIT_SPELLCAST = 9,
+	BATTLE_START = 10,
+	ROUND_START = 11,
 };

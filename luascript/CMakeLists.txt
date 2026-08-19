@@ -3,14 +3,21 @@ include_directories(${CMAKE_HOME_DIRECTORY} ${CMAKE_HOME_DIRECTORY}/include ${CM
 set(lualib_SRCS
 		StdInc.cpp
 		LuaReference.cpp
+		LuaMapEventDispatcher.cpp
 		LuaModule.cpp
 		LuaScriptInstance.cpp
 		LuaContext.cpp
 		LuaScriptPool.cpp
+		LuaScriptFactory.cpp
 		LuaSpellEffect.cpp
+		LuaCombatEventScript.cpp
 		LuaStack.cpp
 
+		api/adventure/Calendar.cpp
 		api/adventure/HeroInstance.cpp
+		api/adventure/MapObject.cpp
+		api/adventure/MapScriptInit.cpp
+		api/adventure/TownInstance.cpp
 		api/adventure/StackInstance.cpp
 
 		api/battle/Unit.cpp
@@ -31,14 +38,17 @@ set(lualib_SRCS
 		api/library/HeroClass.cpp
 		api/library/HeroType.cpp
 		api/library/Services.cpp
+		api/library/ResourceType.cpp
 		api/library/Skill.cpp
 		api/library/Spell.cpp
 		api/library/SpellSchool.cpp
 
 		api/callback/IBattleInfoCallback.cpp
 		api/Enums.cpp
+		api/LuaComponent.cpp
 		api/LuaMetaString.cpp
 		api/DocExport.cpp
+		api/callback/AdventureServer.cpp
 		api/callback/IGameInfoCallback.cpp
 		api/Registry.cpp
 		api/callback/ServerCallback.cpp
@@ -48,15 +58,22 @@ set(lualib_HDRS
 		StdInc.h
 		LuaCallWrapper.h
 		LuaReference.h
+		LuaMapEventDispatcher.h
 		LuaModule.h
 		LuaScriptInstance.h
 		LuaContext.h
 		LuaSpellEffect.h
+		LuaCombatEventScript.h
 		LuaScriptPool.h
+		LuaScriptFactory.h
 		LuaStack.h
 		LuaWrapper.h
 
+		api/adventure/Calendar.h
 		api/adventure/HeroInstance.h
+		api/adventure/MapObject.h
+		api/adventure/MapScriptInit.h
+		api/adventure/TownInstance.h
 		api/adventure/StackInstance.h
 
 		api/battle/Unit.h
@@ -76,6 +93,7 @@ set(lualib_HDRS
 		api/library/HeroClass.h
 		api/library/HeroType.h
 		api/library/Services.h
+		api/library/ResourceType.h
 		api/library/Skill.h
 		api/library/Spell.h
 		api/library/SpellSchool.h
@@ -88,7 +106,9 @@ set(lualib_HDRS
 		api/DocRegistrar.h
 		api/Enums.h
 		api/FieldDocRegistrar.h
+		api/LuaComponent.h
 		api/LuaMetaString.h
+		api/callback/AdventureServer.h
 		api/callback/IGameInfoCallback.h
 		api/LuaRegistrar.h
 		api/MethodRegistrar.h

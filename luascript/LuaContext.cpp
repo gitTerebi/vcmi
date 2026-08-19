@@ -113,6 +113,12 @@ LuaContext::LuaContext(const LuaScriptInstance * source, const Environment * env
 		lua_setglobal(L, lib.name);
 	}
 
+#if LUA_VERSION_NUM >= 502
+	// Since 5.2 the coroutine library is separate; on 5.1/LuaJIT it comes with luaopen_base.
+	luaopen_coroutine(L);
+	lua_setglobal(L, LUA_COLIBNAME);
+#endif
+
 	lua_settop(L, 0);
 
 	cleanupGlobals();
@@ -200,21 +206,18 @@ void LuaContext::cleanupGlobals()
 
 bool LuaContext::hasFunction(const std::string & name)
 {
-	std::lock_guard guard(mutex);
 	if(!scriptTable)
 		return false;
 	LuaStack S(L);
 	scriptTable->push();
 	lua_getfield(L, -1, name.c_str());
 	bool result = S.isFunction(-1);
-	S.clear();
+	S.restoreInitialTop();
 	return result;
 }
 
 void LuaContext::initialize()
 {
-	std::lock_guard guard(mutex);
-
 	std::shared_ptr<LuaReference> head;
 
 	for(const auto & layer : script->layers)
@@ -280,13 +283,6 @@ void LuaContext::installChunkEnvWithBase(LuaReference & base)
 	lua_setupvalue(L, -2, 1);
 #endif
 	// Stack: ..., chunk
-}
-
-int LuaContext::errorRetVoid(const std::string & message)
-{
-	logScript->error(message);
-	lua_settop(L, 0);
-	return 0;
 }
 
 std::string LuaContext::toStringRaw(int index)

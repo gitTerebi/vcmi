@@ -15,6 +15,7 @@
 #include "PacksForLobby.h"
 #include "SaveLocalState.h"
 #include "SetRewardableConfiguration.h"
+#include "SetScriptVariable.h"
 #include "SetStackEffect.h"
 
 class ICPackVisitor
@@ -90,6 +91,8 @@ public:
 	virtual void visitNewTurn(NewTurn & pack) {}
 	virtual void visitInfoWindow(InfoWindow & pack) {}
 	virtual void visitSetObjectProperty(SetObjectProperty & pack) {}
+	virtual void visitSetScriptVariable(SetScriptVariable & pack) {}
+	virtual void visitSetQuestHint(SetQuestHint & pack) {}
 	virtual void visitChangeObjectVisitors(ChangeObjectVisitors & pack) {}
 	virtual void visitChangeArtifactsCostume(ChangeArtifactsCostume & pack) {}
 	virtual void visitHeroLevelUp(HeroLevelUp & pack) {}
@@ -117,6 +120,7 @@ public:
 	virtual void visitBattleObstaclesChanged(BattleObstaclesChanged & pack) {}
 	virtual void visitBattleSetStackProperty(BattleSetStackProperty & pack) {}
 	virtual void visitBattleTriggerEffect(BattleTriggerEffect & pack) {}
+	virtual void visitBattleAnimationPlayed(BattleAnimationPlayed & pack) {}
 	virtual void visitBattleUpdateGateState(BattleUpdateGateState & pack) {}
 	virtual void visitAdvmapSpellCast(AdvmapSpellCast & pack) {}
 	virtual void visitShowWorldViewEx(ShowWorldViewEx & pack) {}

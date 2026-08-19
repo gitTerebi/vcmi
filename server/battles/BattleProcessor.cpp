@@ -135,7 +135,7 @@ void BattleProcessor::startBattle(const CArmedInstance *army1, const CArmedInsta
 
 	auto attackerQuery = gameHandler->queries->topQuery(battle->getSide(BattleSide::ATTACKER).color);
 	auto * topBattleQuery = gameHandler->queries->queryAs<CBattleQuery>(attackerQuery);
-	if(!topBattleQuery && army2->getOwner().isValidPlayer())
+	if(!topBattleQuery && battle->getSide(BattleSide::DEFENDER).color.isValidPlayer())
 	{
 		auto defenderQuery = gameHandler->queries->topQuery(battle->getSide(BattleSide::DEFENDER).color);
 		topBattleQuery = gameHandler->queries->queryAs<CBattleQuery>(defenderQuery);
@@ -404,6 +404,11 @@ void BattleProcessor::setBattleResult(const CBattleInfoCallback & battle, EBattl
 bool BattleProcessor::makeAutomaticBattleAction(const CBattleInfoCallback & battle, const BattleAction &ba)
 {
 	return actionsProcessor->makeAutomaticBattleAction(battle, ba);
+}
+
+void BattleProcessor::processBattleEventTriggers(const CBattleInfoCallback & battle, CombatEventType event, const battle::Unit * target, const battle::Unit * secondary)
+{
+	actionsProcessor->processBattleEventTriggers(battle, event, target, secondary);
 }
 
 void BattleProcessor::endBattleConfirm(const BattleID & battleID)

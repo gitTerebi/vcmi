@@ -44,6 +44,8 @@
 #include "media/IMusicPlayer.h"
 #include "media/ISoundPlayer.h"
 
+#include "replay/GameplayReplayer.h"
+
 #include "render/CAnimation.h"
 #include "render/IImage.h"
 #include "render/IRenderHandler.h"
@@ -434,6 +436,13 @@ void CPlayerInterface::townRemoved(const CGTownInstance* town)
 {
 	EVENT_HANDLER_CALLED_BY_CLIENT;
 
+	// close town screen if it shows the town being removed, otherwise objectRemovedAfter dereferences a dangling pointer
+	if(castleInt && castleInt->town == town)
+	{
+		castleInt->close();
+		castleInt = nullptr;
+	}
+
 	if(town->tempOwner == playerID)
 	{
 		localState->removeOwnedTown(town);
@@ -807,12 +816,19 @@ void CPlayerInterface::actionStarted(const BattleID & battleID, const BattleActi
 	EVENT_HANDLER_CALLED_BY_CLIENT;
 	BATTLE_EVENT_POSSIBLE_RETURN;
 
+	if(battleInt)
+		battleInt->trySetActivePlayer(cb->getBattle(battleID)->sideToPlayer(action.side));
+
 	battleInt->startAction(action);
 }
 
 void CPlayerInterface::actionFinished(const BattleID & battleID, const BattleAction &action)
 {
 	EVENT_HANDLER_CALLED_BY_CLIENT;
+
+	if (autofightingAI && !isAutoFightOn)
+		unregisterBattleInterface(autofightingAI);
+
 	BATTLE_EVENT_POSSIBLE_RETURN;
 
 	battleInt->endAction(action);
@@ -834,15 +850,11 @@ void CPlayerInterface::activeStack(const BattleID & battleID, const CStack * sta
 
 	if (autofightingAI)
 	{
-		if (isAutoFightOn)
-		{
-			//FIXME: we want client rendering to proceed while AI is making actions
-			// so unlock mutex while AI is busy since this might take quite a while, especially if hero has many spells
-			auto unlockInterface = vstd::makeUnlockGuard(ENGINE->interfaceMutex);
-			autofightingAI->activeStack(battleID, stack);
-			return;
-		}
-		unregisterBattleInterface(autofightingAI);
+		//FIXME: we want client rendering to proceed while AI is making actions
+		// so unlock mutex while AI is busy since this might take quite a while, especially if hero has many spells
+		auto unlockInterface = vstd::makeUnlockGuard(ENGINE->interfaceMutex);
+		autofightingAI->activeStack(battleID, stack);
+		return;
 	}
 
 	assert(battleInt);
@@ -921,6 +933,13 @@ void CPlayerInterface::battleStacksEffectsSet(const BattleID & battleID, const S
 
 	battleInt->battleStacksEffectsSet(sse);
 }
+void CPlayerInterface::battleAnimationPlayed(const BattleID & battleID, const BattleAnimationPlayed & pack)
+{
+	EVENT_HANDLER_CALLED_BY_CLIENT;
+	BATTLE_EVENT_POSSIBLE_RETURN;
+
+	battleInt->effectsController->battleAnimationPlayed(pack);
+}
 void CPlayerInterface::battleTriggerEffect(const BattleID & battleID, const BattleTriggerEffect & bte)
 {
 	EVENT_HANDLER_CALLED_BY_CLIENT;
@@ -957,7 +976,6 @@ void CPlayerInterface::battleStacksAttacked(const BattleID & battleID, const std
 		info.killed         = elem.killed();
 		info.rebirth        = elem.willRebirth();
 		info.cloneKilled    = elem.cloneKilled();
-		info.fireShield     = elem.fireShield();
 
 		if (elem.isSpell())
 			info.spellEffect = elem.spellID;
@@ -978,7 +996,6 @@ void CPlayerInterface::battleAttack(const BattleID & battleID, const BattleAttac
 	info.lucky = ba->lucky();
 	info.unlucky = ba->unlucky();
 	info.deathBlow = ba->deathBlow();
-	info.lifeDrain = ba->lifeDrain();
 	info.playCustomAnimation = ba->playCustomAnimation();
 	info.tile = ba->tile;
 	info.spellEffect = SpellID::NONE;
@@ -1547,6 +1564,11 @@ void CPlayerInterface::newObject( const CGObjectInstance * obj )
 void CPlayerInterface::centerView (int3 pos, int focusTime)
 {
 	EVENT_HANDLER_CALLED_BY_CLIENT;
+
+	// while a replay follows another player, the camera stays with him
+	if(replayFollowedPlayer())
+		return;
+
 	waitWhileDialog();
 	ENGINE->cursor().hide();
 	adventureInt->centerOnTile(pos);
@@ -2096,6 +2118,7 @@ void CPlayerInterface::prepareAutoFightingAI(const BattleID &bid, const CCreatur
 
 	AutocombatPreferences autocombatPreferences = AutocombatPreferences();
 	autocombatPreferences.enableSpellsUsage = settings["battle"]["enableAutocombatSpells"].Bool();
+	autocombatPreferences.enableTacticsUsage = settings["battle"]["enableAutocombatTactics"].Bool();
 
 	autofightingAI->initBattleInterface(env, cb, autocombatPreferences);
 	autofightingAI->battleStart(bid, army1, army2, tile, hero1, hero2, side, false);

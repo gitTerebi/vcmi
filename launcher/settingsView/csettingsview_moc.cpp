@@ -248,7 +248,7 @@ void CSettingsView::loadSettings()
 	ui->spinBoxFramerateLimit->setDisabled(settings["video"]["vsync"].Bool());
 	ui->sliderReservedArea->setValue(std::round(settings["video"]["reservedWidth"].Float() * 100));
 
-	ui->spinBoxNetworkPort->setValue(settings["server"]["port"].Integer());
+	ui->spinBoxNetworkPort->setValue(settings["server"]["localPort"].Integer());
 
 	ui->lineEditRepositoryDefault->setText(QString::fromStdString(settings["launcher"]["defaultRepositoryURL"].String()));
 	ui->lineEditRepositoryExtra->setText(QString::fromStdString(settings["launcher"]["extraRepositoryURL"].String()));
@@ -396,7 +396,7 @@ void CSettingsView::fillValidScalingRange()
 
 static QStringList getAvailableRenderingDrivers()
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_InitSubSystem(SDL_INIT_VIDEO);
 	QStringList result;
 
 	result += QString(); // empty value for autoselection
@@ -410,7 +410,7 @@ static QStringList getAvailableRenderingDrivers()
 			result += QString::fromLatin1(info.name);
 	}
 
-	SDL_Quit();
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	return result;
 }
 
@@ -419,7 +419,7 @@ static QVector<QSize> findAvailableResolutions(int displayIndex)
 	// Ugly workaround since we don't actually need SDL in Launcher
 	// However Qt at the moment provides no way to query list of available resolutions
 	QVector<QSize> result;
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_InitSubSystem(SDL_INIT_VIDEO);
 
 	int modesCount = SDL_GetNumDisplayModes(displayIndex);
 
@@ -441,7 +441,7 @@ static QVector<QSize> findAvailableResolutions(int displayIndex)
 
 	result.erase(std::ranges::unique(result).end(), result.end());
 
-	SDL_Quit();
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 
 	return result;
 }
@@ -647,8 +647,8 @@ void CSettingsView::on_comboBoxAlliedPlayerAI_currentIndexChanged(int index)
 
 void CSettingsView::on_spinBoxNetworkPort_valueChanged(int arg1)
 {
-	Settings node = settings.write["server"]["port"];
-	node->Float() = arg1;
+	Settings node = settings.write["server"]["localPort"];
+	node->Integer() = arg1;
 }
 
 void CSettingsView::on_buttonSaveBeforeVisit_toggled(bool value)

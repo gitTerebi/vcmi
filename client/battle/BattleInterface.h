@@ -67,7 +67,6 @@ struct StackAttackedInfo
 	bool killed; //if true, stack has been killed
 	bool rebirth; //if true, play rebirth animation after all
 	bool cloneKilled;
-	bool fireShield;
 };
 
 struct StackAttackInfo
@@ -83,7 +82,6 @@ struct StackAttackInfo
 	bool lucky;
 	bool unlucky;
 	bool deathBlow;
-	bool lifeDrain;
 	bool playCustomAnimation;
 };
 
@@ -134,7 +132,6 @@ public:
 	const CGHeroInstance *attackingHeroInstance;
 	const CGHeroInstance *defendingHeroInstance;
 
-	bool tacticsMode;
 	ui32 round;
 
 	std::unique_ptr<BattleProjectileController> projectilesController;
@@ -233,4 +230,6 @@ public:
 
 	const CGHeroInstance *currentHero() const;
 	InfoAboutHero enemyHero() const;
+
+	bool isInTacticsMode();
 };

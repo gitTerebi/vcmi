@@ -376,6 +376,16 @@ void SetObjectProperty::visitTyped(ICPackVisitor & visitor)
 	visitor.visitSetObjectProperty(*this);
 }
 
+void SetScriptVariable::visitTyped(ICPackVisitor & visitor)
+{
+	visitor.visitSetScriptVariable(*this);
+}
+
+void SetQuestHint::visitTyped(ICPackVisitor & visitor)
+{
+	visitor.visitSetQuestHint(*this);
+}
+
 void ChangeObjectVisitors::visitTyped(ICPackVisitor & visitor)
 {
 	visitor.visitChangeObjectVisitors(*this);
@@ -509,6 +519,11 @@ void BattleSetStackProperty::visitTyped(ICPackVisitor & visitor)
 void BattleTriggerEffect::visitTyped(ICPackVisitor & visitor)
 {
 	visitor.visitBattleTriggerEffect(*this);
+}
+
+void BattleAnimationPlayed::visitTyped(ICPackVisitor & visitor)
+{
+	visitor.visitBattleAnimationPlayed(*this);
 }
 
 void BattleUpdateGateState::visitTyped(ICPackVisitor & visitor)

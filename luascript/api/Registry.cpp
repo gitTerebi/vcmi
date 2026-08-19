@@ -13,6 +13,7 @@
 #include "SerializableRegistar.h"
 
 #include "../../lib/battle/CBattleInfoCallback.h"
+#include "../../lib/battle/Destination.h"
 #include "../../lib/battle/IBattleState.h"
 #include "../../lib/json/JsonNode.h"
 #include "../../lib/mapObjects/CGObjectInstance.h"
@@ -20,6 +21,7 @@
 #include <boost/core/demangle.hpp>
 
 #include "Enums.h"
+#include "LuaComponent.h"
 #include "LuaMetaString.h"
 #include "battle/SpellObstacleDescriptor.h"
 #include "battle/Unit.h"
@@ -37,8 +39,14 @@
 #include "library/Faction.h"
 #include "callback/IGameInfoCallback.h"
 #include "library/HeroClass.h"
+#include "adventure/Calendar.h"
 #include "adventure/HeroInstance.h"
+#include "adventure/MapObject.h"
+#include "adventure/MapScriptInit.h"
+#include "adventure/TownInstance.h"
 #include "library/HeroType.h"
+#include "library/ResourceType.h"
+#include "callback/AdventureServer.h"
 #include "callback/ServerCallback.h"
 #include "library/Services.h"
 #include "library/Skill.h"
@@ -59,11 +67,13 @@ Registry::Registry()
 	registerPrivate<FactionProxy>();
 	registerPrivate<HeroClassProxy>();
 	registerPrivate<HeroTypeProxy>();
+	registerPrivate<ResourceTypeProxy>();
 	registerPrivate<SkillProxy>();
 	registerPrivate<SpellProxy>();
 	registerPrivate<SpellSchoolProxy>();
 
 	registerPrivate<HeroInstanceProxy>();
+	registerPrivate<CalendarProxy>();
 	registerPrivate<StackInstanceProxy>();
 
 	registerPrivate<BattleHexProxy>();
@@ -77,16 +87,22 @@ Registry::Registry()
 	registerPrivate<IBattleInfoCallbackProxy>();
 	registerPrivate<IGameInfoCallbackProxy>();
 	registerPrivate<ServerCallbackProxy>();
+	registerPrivate<AdventureServerProxy>();
+
+	registerPrivate<MapObjectProxy>();
+	registerPrivate<MapScriptInitProxy>();
+	registerPrivate<TownInstanceProxy>();
 
 	registerSerializable<Enums>();
 	registerSerializable<LuaMetaString>();
+	registerSerializable<LuaComponent>();
 	registerSerializable<BonusDescriptor>();
 	registerSerializable<SpellObstacleDescriptor>();
 
 	// Aliases for C++ types that have no dedicated proxy but appear in binding signatures.
 	registerLuaName<CBattleInfoCallback>("Battle");
-	registerLuaName<CGObjectInstance>("MapObject");
 	registerLuaName<battle::UnitInfo>("UnitInfo");
+	registerLuaName<battle::Destination>("Destination");
 	// JsonNode fields accept any Lua value (string / number / table / …) and are funneled
 	// through JsonUtils::parseBonus — surface that openness rather than `userdata`.
 	registerLuaName<JsonNode>("any");
@@ -102,6 +118,10 @@ Registry::Registry()
 	registerLuaName<CObstacleInstance::EObstacleType>("ObstacleType");
 	registerLuaName<EWallPart>("WallPart");
 	registerLuaName<BattleSide>("BattleSide");
+	registerLuaName<EMapDifficulty>("Difficulty");
+	registerLuaName<PrimarySkill>("PrimarySkill");
+	registerLuaName<PlayerColor>("PlayerColor");
+	registerLuaName<EPlayerStatus>("PlayerStatus");
 
 	// EWallState has no enum group of its own and is exposed as integer to Lua
 	registerLuaName<EWallState>("integer");
