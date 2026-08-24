@@ -65,6 +65,7 @@ class DLL_LINKAGE CampaignHeader : public boost::noncopyable
 
 	HeroTypeID yogWizardID;
 	HeroTypeID gemSorceressID;
+	HeroTypeID mutareDrakeID;
 
 	int hotaVersion = 0; // not serialized - loading only
 	int numberOfScenarios = 0;
@@ -93,6 +94,7 @@ public:
 
 	HeroTypeID getYogWizardID() const;
 	HeroTypeID getGemSorceressID() const;
+	HeroTypeID getMutareDrakeID() const;
 	bool restrictedGarrisonsForAI() const;
 
 	const CampaignRegions & getRegions() const;
@@ -122,6 +124,11 @@ public:
 		h & outroVideo;
 		h & yogWizardID;
 		h & gemSorceressID;
+
+		if(h.hasFeature(Handler::Version::MUTARE_DRAKE_OVERRIDE))
+			h & mutareDrakeID;
+		else if(!h.saving)
+			mutareDrakeID = HeroTypeID();
 	}
 };
 
@@ -257,6 +264,8 @@ class DLL_LINKAGE CampaignState : public Campaign
 
 	/// Script variables carried over between scenarios (only those declared as persistent)
 	ScriptVariablesStorage persistentScriptVariables;
+	std::time_t startTime = 0;
+	std::string saveDirectory;
 
 public:
 	CampaignState() = default;
@@ -271,6 +280,10 @@ public:
 
 	std::optional<CampaignScenarioID> currentScenario() const;
 	std::set<CampaignScenarioID> conqueredScenarios() const;
+	std::time_t getStartTime() const;
+	void setStartTime(std::time_t value);
+	const std::string & getSaveDirectory() const;
+	void setSaveDirectory(const std::string & value);
 
 	/// Returns bonus selected for specific scenario
 	std::optional<CampaignBonus> getBonus(CampaignScenarioID which) const;
@@ -330,5 +343,16 @@ public:
 
 		if(h.hasFeature(Handler::Version::SCRIPT_VARIABLES))
 			h & persistentScriptVariables;
+
+		if(h.hasFeature(Handler::Version::GAME_SESSION_DIRECTORY))
+		{
+			h & startTime;
+			h & saveDirectory;
+		}
+		else if(!h.saving)
+		{
+			startTime = 0;
+			saveDirectory.clear();
+		}
 	}
 };

@@ -364,6 +364,26 @@ std::optional<CampaignScenarioID> CampaignState::currentScenario() const
 	return currentMap;
 }
 
+std::time_t CampaignState::getStartTime() const
+{
+	return startTime;
+}
+
+void CampaignState::setStartTime(std::time_t value)
+{
+	startTime = value;
+}
+
+const std::string & CampaignState::getSaveDirectory() const
+{
+	return saveDirectory;
+}
+
+void CampaignState::setSaveDirectory(const std::string & value)
+{
+	saveDirectory = value;
+}
+
 std::optional<CampaignScenarioID> CampaignState::lastScenario() const
 {
 	if (mapsConquered.empty())
@@ -411,6 +431,8 @@ void Campaign::overrideCampaign()
 		gemSorceressID = HeroTypeID(*LIBRARY->identifiersHandler->getIdentifier("hero", overrides["heroGemSorceress"]));
 	if(!overrides["heroYogWizard"].isNull())
 		yogWizardID = HeroTypeID(*LIBRARY->identifiersHandler->getIdentifier("hero", overrides["heroYogWizard"]));
+	if(!overrides["heroMutareDrake"].isNull())
+		mutareDrakeID = HeroTypeID(*LIBRARY->identifiersHandler->getIdentifier("hero", overrides["heroMutareDrake"]));
 
 	restrictGarrisonsAI	= overrides["restrictedGarrisonsForAI"].Bool();
 }
@@ -455,6 +477,10 @@ bool CampaignState::isCampaignFinished() const
 HeroTypeID CampaignHeader::getYogWizardID() const
 {
 	return yogWizardID;
+}
+HeroTypeID CampaignHeader::getMutareDrakeID() const
+{
+	return mutareDrakeID;
 }
 HeroTypeID CampaignHeader::getGemSorceressID() const
 {

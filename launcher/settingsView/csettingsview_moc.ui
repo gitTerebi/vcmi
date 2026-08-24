@@ -616,22 +616,6 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
-        <widget class="QToolButton" name="buttonAutoSavePrefix">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="56" column="1" colspan="5">
         <widget class="QComboBox" name="comboBoxEnemyAI">
          <property name="editable">
@@ -787,13 +771,6 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
-        <widget class="QLabel" name="labelAutoSavePrefix">
-         <property name="text">
-          <string>Autosave prefix</string>
-         </property>
-        </widget>
-       </item>
        <item row="46" column="1" colspan="5">
         <widget class="QSlider" name="sliderToleranceDistanceTouch">
          <property name="minimum">
@@ -819,13 +796,6 @@
          </property>
          <property name="tickInterval">
           <number>10</number>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2" colspan="4">
-        <widget class="QLineEdit" name="lineEditAutoSavePrefix">
-         <property name="placeholderText">
-          <string>empty = map name prefix</string>
          </property>
         </widget>
        </item>
@@ -1258,7 +1228,7 @@
        <item row="7" column="0">
         <widget class="QLabel" name="labelAutoSaveLimit">
          <property name="text">
-          <string>Autosave limit (0 = off)</string>
+          <string>Autosaves per game (0 = unlimited)</string>
          </property>
         </widget>
        </item>
